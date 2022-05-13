@@ -29,8 +29,11 @@ public class PlayerController : PhysicsObject
         Shooting();
         Move();
         Debug.Log(grounded);
-        Debug.Log(velocity.y);
-        /*Jumping();*/
+        /*Debug.Log(velocity.y);*/
+        Jumping();
+
+        anim.SetBool("grounded", grounded);
+        anim.SetFloat("velocityY", velocity.y);
     }
 
     void Shooting()
@@ -54,14 +57,12 @@ public class PlayerController : PhysicsObject
 
         if (move.x != 0)
         {
-            anim.SetBool("isRunning", true);
-
             TurnSide(move.x);
-        } else
-        {
-            anim.SetBool("isRunning", false);
-        }
+        } 
+        
+        // update properties for moving and animations
         targetVelocity = move * speedMovement;
+        anim.SetInteger("velocityX", (int) move.x);
     }
 
     void TurnSide(float moveX)
@@ -79,7 +80,7 @@ public class PlayerController : PhysicsObject
 
     void Jumping()
     {
-        if(Input.GetButtonDown("Jump") && jumpState == JumpState.grounded)
+        if(Input.GetButtonDown("Jump") && anim.GetFloat("velocityY").Equals(0))
         {
             Jump(1);
         }
@@ -87,8 +88,7 @@ public class PlayerController : PhysicsObject
 
     void Jump(float jumpMultiplier)
     {
-        jumpState = JumpState.jumping;
-        anim.SetBool("isJumping", true);
+        /*jumpState = JumpState.jumping;*/
         velocity.y = jumpForce * jumpMultiplier;
     }
 }
