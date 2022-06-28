@@ -438,6 +438,7 @@ GameObject:
   - component: {fileID: 1925980458}
   - component: {fileID: 1925980457}
   - component: {fileID: 1925980456}
+  - component: {fileID: 1925980459}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -590,6 +591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minGroundNormalY: 0.65
   gravityModifier: 1
+  rb2d: {fileID: 0}
   contactFilter:
     useTriggers: 0
     useLayerMask: 0
@@ -598,13 +600,51 @@ MonoBehaviour:
     useNormalAngle: 0
     useOutsideNormalAngle: 0
     layerMask:
-      serializedVersion: 2
       m_Bits: 0
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  rig: {fileID: 0}
+  anim: {fileID: 0}
   speedMovement: 3
   jumpForce: 2
   jumpState: 0
   shootTimer: 0.3
+--- !u!114 &1925980459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925980452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f20d3f151e19fdd4484355740959f24f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  sideState: 0
+  xSpeed: 7.5
+  xMoveImput: 0
+  isGrounded: 0
+  jumpState: 4
+  isJumping: 0
+  fallMultiplaier: 5.5
+  jumpMultiplaier: 2
+  jumpForce: 7
+  jumpCounter: 0
+  jumpTime: 0.35
+  wallslideState: 0
+  maxWallSliderTime: 0.3
+  groundCheckDistance: -0.5
+  wallSlidingEndsAt: 0
+  isWallSliding: 0
+  isWallJumping: 0
+  wallDistance: 0.55
+  dashState: 0
+  isDashing: 0
+  dashTime: 0.19
+  dashSpeed: 4.5

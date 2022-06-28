@@ -59,14 +59,6 @@ public class PlayerController : MonoBehaviour
         ComputeWallSliding(xMoveImput);
 
         ComputeDash();
-
-        if (Input.GetButtonDown("Fire3") && Time.timeScale == 1)
-        {
-            Time.timeScale = 0;
-        } else if (Input.GetButtonDown("Fire3") && Time.timeScale == 0)
-        {
-            Time.timeScale = 1;
-        }
     }
 
     void FixedUpdate()
@@ -84,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
     private void IsGrounded()
     {
-        Collider2D collider = Physics2D.OverlapBox(transform.position + new Vector3(0, -.5f, 0), new Vector3(.97f, .03f, 0), 0, groundLayer);
+        Collider2D collider = Physics2D.OverlapBox(transform.position + new Vector3(0, -0.7f, 0), new Vector3(.97f, .03f, 0), 0, groundLayer);
 
         isGrounded = collider ? true : false;
     }
@@ -110,7 +102,7 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position + new Vector3(0, -.5f, 0), new Vector3(.97f, .03f, 0));
+        Gizmos.DrawWireCube(transform.position + new Vector3(0, -0.7f, 0), new Vector3(.97f, .03f, 0));
     }
 
     /* --- Start Dash --- */
