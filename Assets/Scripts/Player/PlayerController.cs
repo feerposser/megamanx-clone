@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
 
     Vector2 fallVectorGravity;
-    Rigidbody2D rb;
+    protected Rigidbody2D rb;
 
     public enum WallslideState { DEFAULT, PREPARETOSLIDE, SLIDING, PREPARETOJUMP, WALLJUMPING }
     public enum JumpState { DEFAULT, PREPARETOJUMP, JUMPING, PREPARETOFALL, FALLING }
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     public float jumpMultiplaier = 2;
     public float jumpForce = 7;
     public float jumpCounter;
-    public float jumpTime =.35f;
+    public float jumpTime = .35f;
 
     [Header("Wall Sliding")]
     public WallslideState wallslideState = WallslideState.DEFAULT;
@@ -44,13 +44,13 @@ public class PlayerController : MonoBehaviour
     public float dashTime = 0.19f;
     public float dashSpeed = 4.5f;
 
-    void Start()
+    protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         fallVectorGravity = new Vector2(rb.velocity.x, -Physics2D.gravity.y);
     }
 
-    void Update()
+    protected void Update()
     {
         ComputeMovement(out xMoveImput);
 
@@ -59,9 +59,18 @@ public class PlayerController : MonoBehaviour
         ComputeWallSliding(xMoveImput);
 
         ComputeDash();
+
+        if (Input.GetButtonDown("Fire3") && Time.timeScale == 1)
+        {
+            Time.timeScale = 0;
+        }
+        else if (Input.GetButtonDown("Fire3") && Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+        }
     }
 
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
         ExecuteMovement(xMoveImput);
 
@@ -76,7 +85,7 @@ public class PlayerController : MonoBehaviour
 
     private void IsGrounded()
     {
-        Collider2D collider = Physics2D.OverlapBox(transform.position + new Vector3(0, -0.7f, 0), new Vector3(.97f, .03f, 0), 0, groundLayer);
+        Collider2D collider = Physics2D.OverlapBox(transform.position + new Vector3(0, -.7f, 0), new Vector3(.97f, .03f, 0), 0, groundLayer);
 
         isGrounded = collider ? true : false;
     }
@@ -102,13 +111,13 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position + new Vector3(0, -0.7f, 0), new Vector3(.97f, .03f, 0));
+        Gizmos.DrawWireCube(transform.position + new Vector3(0, -.7f, 0), new Vector3(.97f, .03f, 0));
     }
 
     /* --- Start Dash --- */
     private void Dash(float multiplier = 1)
     {
-        Vector2 vector = (sideState == SideState.RIGHT) ? 
+        Vector2 vector = (sideState == SideState.RIGHT) ?
             Vector2.right * multiplier : Vector2.left * multiplier;
 
         rb.AddForce(vector * multiplier, ForceMode2D.Impulse);
@@ -124,7 +133,7 @@ public class PlayerController : MonoBehaviour
 
     private void ExecuteDash()
     {
-        if (dashState == DashState.PREPARETODASH)
+        if (dashState.Equals(DashState.PREPARETODASH))
         {
             dashState = DashState.DASHING;
             StartCoroutine("CoroutineExecuteDash");
@@ -133,7 +142,7 @@ public class PlayerController : MonoBehaviour
 
     protected void ComputeDash()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         {
             dashState = DashState.PREPARETODASH;
         }
@@ -174,17 +183,22 @@ public class PlayerController : MonoBehaviour
 
     private void ExecuteWallSliding()
     {
-        if (wallslideState == WallslideState.PREPARETOSLIDE)
+        if (wallslideState.Equals(WallslideState.DEFAULT))
+        {
+            isWallJumping = false;
+        }
+
+        if (wallslideState.Equals(WallslideState.PREPARETOSLIDE))
         {
             WallSlidingPrepareToSlide();
         }
 
-        if (wallslideState == WallslideState.SLIDING)
+        if (wallslideState.Equals(WallslideState.SLIDING))
         {
             WallSlidingSliding();
         }
 
-        if (wallslideState == WallslideState.PREPARETOJUMP)
+        if (wallslideState.Equals(WallslideState.PREPARETOJUMP))
         {
             WallSlidingPrepareToJump();
         }
@@ -192,9 +206,9 @@ public class PlayerController : MonoBehaviour
 
     protected void ComputeWallSliding(float move)
     {
-        if (!isGrounded && HaveWallContact() && move != 0 && wallslideState == WallslideState.DEFAULT)
+        if (!isGrounded && HaveWallContact() && move != 0 && wallslideState.Equals(WallslideState.DEFAULT))
         {
-            wallslideState = WallslideState.PREPARETOSLIDE; 
+            wallslideState = WallslideState.PREPARETOSLIDE;
         }
 
         if (isWallSliding && Input.GetButtonDown("Jump"))
@@ -303,7 +317,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded && !isJumping)
         {
             jumpState = JumpState.PREPARETOJUMP;
-        } 
+        }
 
         if (Input.GetButtonUp("Jump"))
         {
@@ -315,12 +329,11 @@ public class PlayerController : MonoBehaviour
     private void Move(float move, float moveMultiplier = 1)
     {
         rb.velocity = new Vector2(move * xSpeed * moveMultiplier, rb.velocity.y);
-        //Debug.Log("move: " + rb.velocity.y);
     }
 
     private void ExecuteMovement(float move)
     {
-        if(!isDashing)
+        if (!isDashing)
         {
             Move(move);
         }

@@ -435,10 +435,10 @@ GameObject:
   - component: {fileID: 1925980455}
   - component: {fileID: 1925980454}
   - component: {fileID: 1925980453}
-  - component: {fileID: 1925980458}
   - component: {fileID: 1925980457}
   - component: {fileID: 1925980456}
   - component: {fileID: 1925980459}
+  - component: {fileID: 1925980458}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -586,9 +586,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 1925980452}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb968751b2d163a4eb860e5505627d8b, type: 3}
+  m_Script: {fileID: 11500000, guid: d575cf398a994764dabb7a5f6ede055c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  sideState: 0
+  xSpeed: 7.5
+  xMoveImput: 0
+  isGrounded: 0
+  jumpState: 4
+  isJumping: 0
+  fallMultiplaier: 5.5
+  jumpMultiplaier: 2
+  jumpForce: 7
+  jumpCounter: 0
+  jumpTime: 0.35
+  wallslideState: 0
+  maxWallSliderTime: 0.3
+  groundCheckDistance: -0.5
+  wallSlidingEndsAt: 0
+  isWallSliding: 0
+  isWallJumping: 0
+  wallDistance: 0.7
+  dashState: 0
+  isDashing: 0
+  dashTime: 0.19
+  dashSpeed: 4.5
 --- !u!114 &1925980459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,7 +621,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925980452}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f20d3f151e19fdd4484355740959f24f, type: 3}
   m_Name: 
@@ -621,7 +646,7 @@ MonoBehaviour:
   wallSlidingEndsAt: 0
   isWallSliding: 0
   isWallJumping: 0
-  wallDistance: 0.55
+  wallDistance: 0.7
   dashState: 0
   isDashing: 0
   dashTime: 0.19
