@@ -11,7 +11,7 @@ public class MainPlayerController : PlayerController
     {
         base.Start();
 
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -20,10 +20,10 @@ public class MainPlayerController : PlayerController
 
         TurnSpriteDirection();
 
-        /*anim.SetInteger("xVelocity", (int)rb.velocity.x);
+        anim.SetInteger("xVelocity", (int)rb.velocity.x);
         anim.SetBool("isGrounded", isGrounded);
         anim.SetInteger("yVelocity", (int)rb.velocity.y);
-        anim.SetBool("isWalljumping", isWallJumping);*/
+        /*anim.SetBool("isWalljumping", isWallJumping);*/
     }
 
     void TurnSpriteDirection()
