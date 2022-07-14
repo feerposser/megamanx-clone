@@ -434,11 +434,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1925980455}
   - component: {fileID: 1925980454}
-  - component: {fileID: 1925980453}
   - component: {fileID: 1925980457}
   - component: {fileID: 1925980456}
   - component: {fileID: 1925980459}
   - component: {fileID: 1925980458}
+  - component: {fileID: 1925980453}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -456,7 +456,7 @@ Animator:
   m_GameObject: {fileID: 1925980452}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d4c8ab60f5f29224d9b1dfb30a5455ec, type: 2}
+  m_Controller: {fileID: 9100000, guid: 313e446131299a043a2e457575d516a8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
