@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class FireSystem : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public static FireSystem instance;
+
+    [SerializeField] private Transform shootSpawn;
+    [SerializeField] private BaseShoot[] shoots;
+
     void Start()
     {
-        
+        instance = this;    
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Shoot(int shootIndex, string sideState)
     {
-        
+        Instantiate(shoots[shootIndex], shootSpawn.position, shootSpawn.rotation);
     }
 }

@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
 
         ComputeWallSliding(xMoveImput);
 
-        ComputeDash();
+        /*ComputeDash();*/
 
         if (Input.GetButtonDown("Fire3") && Time.timeScale == 1)
         {
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
 
         ExecuteWallSliding();
 
-        ExecuteDash();
+        /*ExecuteDash();*/
     }
 
     private void IsGrounded()

@@ -7,14 +7,14 @@ public class MainPlayerController : PlayerController
 
     private Animator anim;
 
-    void Start()
+    private void Start()
     {
         base.Start();
 
         anim = GetComponent<Animator>();
     }
 
-    void Update()
+    private void Update()
     {
         base.Update();
 
@@ -24,9 +24,11 @@ public class MainPlayerController : PlayerController
         anim.SetBool("isGrounded", isGrounded);
         anim.SetInteger("yVelocity", (int)rb.velocity.y);
         /*anim.SetBool("isWalljumping", isWallJumping);*/
+
+        ComputeShoot();
     }
 
-    void TurnSpriteDirection()
+    private void TurnSpriteDirection()
     {
         if (sideState == SideState.RIGHT)
         {
@@ -36,6 +38,19 @@ public class MainPlayerController : PlayerController
         {
             transform.eulerAngles = new Vector3(0, 180, 0);
         }
+    }
+
+    private void ComputeShoot()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Shoot();
+        }
+    }
+
+    private void Shoot()
+    {
+        FireSystem.instance.Shoot(0, sideState.ToString());
     }
 
 }
