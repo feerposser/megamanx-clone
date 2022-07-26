@@ -22,6 +22,13 @@ public class BaseShoot : MonoBehaviour
         Destroy(gameObject, 5);
     }
 
+    public void SetDirection(string direction)
+    {
+        direction = direction.ToUpper();
+
+        sideState = direction.Equals("RIGHT") ? SideState.RIGHT : SideState.LEFT;
+    }
+
     private void FixedUpdate()
     {
         if (sideState.Equals(SideState.RIGHT))
