@@ -16,6 +16,8 @@ public class FireSystem : MonoBehaviour
 
     public void Shoot(int shootIndex, string sideState)
     {
-        Instantiate(shoots[shootIndex], shootSpawn.position, shootSpawn.rotation).SetDirection(sideState);
+        Instantiate(shoots[shootIndex], 
+            shootSpawn.position, shootSpawn.rotation)
+            .SetDirection(sideState);
     }
 }

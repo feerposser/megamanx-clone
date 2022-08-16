@@ -26,7 +26,8 @@ public class BaseShoot : MonoBehaviour
     {
         direction = direction.ToUpper();
 
-        sideState = direction.Equals("RIGHT") ? SideState.RIGHT : SideState.LEFT;
+        sideState = direction.Equals("RIGHT") ? 
+            SideState.RIGHT : SideState.LEFT;
     }
 
     private void FixedUpdate()
