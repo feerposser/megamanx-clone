@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5552932921361769685}
   - component: {fileID: 5552932921361769690}
   - component: {fileID: 5552932921361769691}
-  - component: {fileID: 5552932921361769688}
   - component: {fileID: 5552932921361769689}
   - component: {fileID: 5552932921361769686}
   - component: {fileID: 5552932921361769695}
@@ -136,43 +135,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.34}
   m_EdgeRadius: 0
---- !u!114 &5552932921361769688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5552932921361769687}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f20d3f151e19fdd4484355740959f24f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  sideState: 0
-  xSpeed: 7.5
-  xMoveImput: 0
-  isGrounded: 0
-  jumpState: 4
-  isJumping: 0
-  fallMultiplaier: 5.5
-  jumpMultiplaier: 2
-  jumpForce: 7
-  jumpCounter: 0
-  jumpTime: 0.35
-  wallslideState: 0
-  maxWallSliderTime: 0.3
-  groundCheckDistance: -0.5
-  wallSlidingEndsAt: 0
-  isWallSliding: 0
-  isWallJumping: 0
-  wallDistance: 0.7
-  dashState: 0
-  isDashing: 0
-  dashTime: 0.19
-  dashSpeed: 4.5
 --- !u!114 &5552932921361769689
 MonoBehaviour:
   m_ObjectHideFlags: 0

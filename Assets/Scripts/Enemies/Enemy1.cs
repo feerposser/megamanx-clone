@@ -21,24 +21,11 @@ public class Enemy1 : EnemyBase
     void FixedUpdate()
     {
         ExecuteMovement();
-        PushDown();
-    }
-
-    void PushDown()
-    {
-        rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + -2);
     }
 
     void ExecuteMovement()
     {
-        if (!isRight)
-        {
-            rb.velocity = Vector2.left * speed;
-        }
-        else
-        {
-            rb.velocity = Vector2.right * speed;
-        }
+        rb.velocity = !isRight ? Vector2.left * speed : Vector2.right * speed;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
