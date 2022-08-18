@@ -232,38 +232,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &386118719 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5552932921361769687, guid: 71291a87d4b83c2438f0b05be7239087, type: 3}
-  m_PrefabInstance: {fileID: 5552932921601099251}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &386118723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 386118719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1349fdd5fc072249823f9ca3ba51003, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &386118728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 386118719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be1463e4b141d6742a5ba9d0530d0f4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tags:
-  - Enemy
-  - Enemy
 --- !u!1 &443839329
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,7 +433,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 219492845058177579, guid: 3a0a0555fd5cde246bf93ed207d1dbb1, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 219492845058177579, guid: 3a0a0555fd5cde246bf93ed207d1dbb1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -626,7 +594,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &5552932921601099251
+--- !u!1001 &1020744183
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -635,15 +603,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5552932921361769684, guid: 71291a87d4b83c2438f0b05be7239087, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5552932921361769684, guid: 71291a87d4b83c2438f0b05be7239087, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.59
+      value: -3.2983084
       objectReference: {fileID: 0}
     - target: {fileID: 5552932921361769684, guid: 71291a87d4b83c2438f0b05be7239087, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.24
+      value: -3.042967
       objectReference: {fileID: 0}
     - target: {fileID: 5552932921361769684, guid: 71291a87d4b83c2438f0b05be7239087, type: 3}
       propertyPath: m_LocalPosition.z

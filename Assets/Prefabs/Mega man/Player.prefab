@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 5552932921361769689}
   - component: {fileID: 5552932921361769686}
   - component: {fileID: 5552932921361769695}
+  - component: {fileID: -4289924790063968034}
+  - component: {fileID: -4845915458887274777}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -206,6 +208,32 @@ MonoBehaviour:
   shootSpawn: {fileID: 5552932922439842488}
   shoots:
   - {fileID: 6752453250912241888, guid: c15129b36b3de9647b440981ad680f5f, type: 3}
+--- !u!114 &-4289924790063968034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5552932921361769687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdd9718b4c309d1468e20ebb8af2ce2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4845915458887274777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5552932921361769687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be1463e4b141d6742a5ba9d0530d0f4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags:
+  - Enemy
 --- !u!1 &5552932922439842489
 GameObject:
   m_ObjectHideFlags: 0
