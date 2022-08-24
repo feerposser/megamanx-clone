@@ -5,7 +5,6 @@ using UnityEngine;
 public class Enemy1 : EnemyBase
 {
     Rigidbody2D rb;
-    
     [SerializeField] float speed;
 
     public bool isRight;
@@ -17,7 +16,6 @@ public class Enemy1 : EnemyBase
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         ExecuteMovement();
@@ -26,15 +24,5 @@ public class Enemy1 : EnemyBase
     void ExecuteMovement()
     {
         rb.velocity = !isRight ? Vector2.left * speed : Vector2.right * speed;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        string tag = collision.gameObject.tag;
-
-        if (tag == "Player")
-        {
-            Debug.Log("set damage to player");
-        }
     }
 }

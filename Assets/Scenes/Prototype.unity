@@ -123,6 +123,24 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &223247068 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5552932921361769687, guid: 71291a87d4b83c2438f0b05be7239087, type: 3}
+  m_PrefabInstance: {fileID: 1020744183}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &223247070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223247068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1349fdd5fc072249823f9ca3ba51003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!1 &323879234
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,6 +619,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4845915458887274777, guid: 71291a87d4b83c2438f0b05be7239087, type: 3}
+      propertyPath: tagsForDamage.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4845915458887274777, guid: 71291a87d4b83c2438f0b05be7239087, type: 3}
+      propertyPath: tagsForDamage.Array.data[0]
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5552932921361769684, guid: 71291a87d4b83c2438f0b05be7239087, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -649,5 +675,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4289924790063968034, guid: 71291a87d4b83c2438f0b05be7239087, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 71291a87d4b83c2438f0b05be7239087, type: 3}
