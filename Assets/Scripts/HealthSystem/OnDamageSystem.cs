@@ -9,15 +9,15 @@ namespace LifeSystem
     {
         [SerializeField] List<string> tagsForDamage; /*Tags enabled to set damage to the object*/
 
-        /* Event handler to broadcast damage */
-        public class DamageEventArgs : EventArgs { public float damage; }
+        /* Event handler to broadcasting damage */
+        public class DamageEventArgs : EventArgs { public int damage; }
         public EventHandler<DamageEventArgs> onDamage;
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (tagsForDamage.Contains(collision.gameObject.tag))
             {
-                onDamage?.Invoke(this, new DamageEventArgs { damage = 10 });
+                onDamage?.Invoke(this, new DamageEventArgs { damage = 5 });
             }
         }
     }

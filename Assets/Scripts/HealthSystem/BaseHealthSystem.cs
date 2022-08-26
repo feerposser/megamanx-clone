@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace LifeSystem
 {
-    public class BaseHealthSystem : MonoBehaviour
+    public abstract class BaseHealthSystem : MonoBehaviour
     {
-        OnDamageSystem onDamage;
+        [SerializeField] OnDamageSystem onDamage;
 
-        [SerializeField] protected float health = 100;
+        [SerializeField] protected int health = 100;
 
         private void Start()
         {
@@ -16,11 +16,7 @@ namespace LifeSystem
             onDamage.onDamage += OnDamage;
         }
 
-        public void OnDamage(object sender, OnDamageSystem.DamageEventArgs args)
-        {
-            Debug.Log(args.damage);
-            health -= args.damage;
-        }
+        public abstract void OnDamage(object sender, OnDamageSystem.DamageEventArgs args);
     }
 
 }
