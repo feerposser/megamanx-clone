@@ -17,8 +17,6 @@ public class PlayerHealthSystem : BaseHealthSystem
     Rigidbody2D rb;
     Animator anim;
 
-    bool onDamage;
-
     private void Awake()
     {
         healthStatusBar.UpdateHealthStatusBar(health);
@@ -27,44 +25,53 @@ public class PlayerHealthSystem : BaseHealthSystem
         anim = GetComponent<Animator>();
 
         sprite = GetComponent<SpriteRenderer>();
+        opacityColor = new Color(1, 1, 1, 0);
         defaultColor = new Color(1, 1, 1, 1);
-        opacityColor = new Color(1, 1, 1, 0.5f);
     }
 
     public override void OnDamage(object sender, OnDamageSystem.DamageEventArgs args)
     {
         health -= args.damage;
+        CheckHealth();
         healthStatusBar.UpdateHealthStatusBar(health);
-        onDamage = true;
         StartCoroutine("DamageEffect");
-        //stay untouchble for x seconds while this opacity is higher than normal
-    }
-
-    private void Update()
-    {
-        if (onDamage)
-        {
-            sprite.color = opacityColor;
-        }
-        else
-        {
-            sprite.color = defaultColor;
-        }
     }
 
     IEnumerator DamageEffect()
     {
+        anim.SetTrigger("damage");
         rb.isKinematic = true;
         collider.isTrigger = true;
 
-        // sprite.color
-        
-        anim.SetTrigger("damage");
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(0.8f);
         
         collider.isTrigger = false;
         rb.isKinematic = false;
 
-        onDamage = false;
+        StartCoroutine("SpriteBlink");
+    }
+
+    IEnumerator SpriteBlink()
+    {
+        bool active = true;
+        for(int i=0; i<20; i++)
+        {
+            active = !active;
+
+            sprite.color = (!active) ? opacityColor : defaultColor;
+
+            yield return new WaitForSeconds(0.05f);
+        }
+    }
+
+    private void CheckHealth()
+    {
+        if (health <= 0) GameOver(); 
+    }
+
+    private void GameOver()
+    {
+        Debug.Log("game over");
+        Time.timeScale = 0;
     }
 }

@@ -18,5 +18,4 @@ namespace LifeSystem
 
         public abstract void OnDamage(object sender, OnDamageSystem.DamageEventArgs args);
     }
-
 }
