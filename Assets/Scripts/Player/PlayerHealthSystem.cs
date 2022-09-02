@@ -31,7 +31,7 @@ public class PlayerHealthSystem : BaseHealthSystem
 
     public override void OnDamage(object sender, OnDamageSystem.DamageEventArgs args)
     {
-        health -= args.damage;
+        DecreaseHealth(args.damage);
         CheckHealth();
         healthStatusBar.UpdateHealthStatusBar(health);
         StartCoroutine("DamageEffect");
@@ -64,9 +64,19 @@ public class PlayerHealthSystem : BaseHealthSystem
         }
     }
 
+    public override void Death()
+    {
+        GameOver();
+    }
+
+    public void IncreaseHealth(int increaseValue)
+    {
+        health += increaseValue;
+    }
+
     private void CheckHealth()
     {
-        if (health <= 0) GameOver(); 
+        if (health <= 0) Death();
     }
 
     private void GameOver()

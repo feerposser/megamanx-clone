@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy1 : EnemyBase
+public class Enemy1 : MonoBehaviour
 {
     Rigidbody2D rb;
     [SerializeField] float speed;
@@ -11,7 +11,6 @@ public class Enemy1 : EnemyBase
 
     void Start()
     {
-        health = 100;
         isRight = false;
         rb = GetComponent<Rigidbody2D>();
     }
