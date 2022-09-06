@@ -13,11 +13,16 @@ namespace LifeSystem
         public class DamageEventArgs : EventArgs { public int damage; }
         public EventHandler<DamageEventArgs> onDamage;
 
+        public bool damageble = true;
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (tagsForDamage.Contains(collision.gameObject.tag))
+            if (damageble)
             {
-                onDamage?.Invoke(this, new DamageEventArgs { damage = 5 });
+                if (tagsForDamage.Contains(collision.gameObject.tag))
+                {
+                    onDamage?.Invoke(this, new DamageEventArgs { damage = 5 });
+                }
             }
         }
     }

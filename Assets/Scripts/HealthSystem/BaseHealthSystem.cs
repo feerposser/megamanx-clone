@@ -16,9 +16,15 @@ namespace LifeSystem
             onDamage.onDamage += OnDamage;
         }
 
-        public abstract void OnDamage(object sender, OnDamageSystem.DamageEventArgs args);
+        protected abstract void Death();
 
-        public abstract void Death();
+        protected abstract void ExecuteDamage();
+
+        protected void OnDamage(object sender, OnDamageSystem.DamageEventArgs args)
+        {
+            DecreaseHealth(args.damage);
+            ExecuteDamage();
+        }
 
         protected void DecreaseHealth(int decreaseValue)
         {

@@ -29,9 +29,8 @@ public class PlayerHealthSystem : BaseHealthSystem
         defaultColor = new Color(1, 1, 1, 1);
     }
 
-    public override void OnDamage(object sender, OnDamageSystem.DamageEventArgs args)
+    protected override void ExecuteDamage()
     {
-        DecreaseHealth(args.damage);
         CheckHealth();
         healthStatusBar.UpdateHealthStatusBar(health);
         StartCoroutine("DamageEffect");
@@ -64,7 +63,7 @@ public class PlayerHealthSystem : BaseHealthSystem
         }
     }
 
-    public override void Death()
+    protected override void Death()
     {
         GameOver();
     }

@@ -579,6 +579,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3964110493897863729, guid: 3a0a0555fd5cde246bf93ed207d1dbb1, type: 3}
+      propertyPath: tagsForDamage.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3964110493897863729, guid: 3a0a0555fd5cde246bf93ed207d1dbb1, type: 3}
+      propertyPath: tagsForDamage.Array.data[0]
+      value: Player Shot
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a0a0555fd5cde246bf93ed207d1dbb1, type: 3}
 --- !u!1 &876712540
