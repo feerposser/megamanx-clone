@@ -20,6 +20,8 @@ namespace LifeSystem
 
         protected abstract void ExecuteDamage();
 
+        protected abstract void CheckHealth();
+
         protected void OnDamage(object sender, OnDamageSystem.DamageEventArgs args)
         {
             DecreaseHealth(args.damage);

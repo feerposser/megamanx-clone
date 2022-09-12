@@ -73,7 +73,7 @@ public class PlayerHealthSystem : BaseHealthSystem
         health += increaseValue;
     }
 
-    private void CheckHealth()
+    protected override void CheckHealth()
     {
         if (health <= 0) Death();
     }

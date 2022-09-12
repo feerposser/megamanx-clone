@@ -15,8 +15,9 @@ namespace LifeSystem
 
         public bool damageble = true;
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void ExecuteDamage(GameObject collision)
         {
+            Debug.Log(gameObject.name + " " + collision.gameObject.name);
             if (damageble)
             {
                 if (tagsForDamage.Contains(collision.gameObject.tag))
@@ -24,6 +25,16 @@ namespace LifeSystem
                     onDamage?.Invoke(this, new DamageEventArgs { damage = 5 });
                 }
             }
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            ExecuteDamage(collision.gameObject);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            ExecuteDamage(collision.gameObject);
         }
     }
 }

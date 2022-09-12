@@ -6,6 +6,13 @@ using LifeSystem;
 
 public class Enemy1HealthSystem : EnemyHealthSystem
 {
+    public Blink blink;
+
+    protected override void CheckHealth()
+    {
+        Debug.Log("bb");
+    }
+
     protected override void Death()
     {
         throw new System.NotImplementedException();
@@ -13,6 +20,6 @@ public class Enemy1HealthSystem : EnemyHealthSystem
 
     protected override void ExecuteDamage()
     {
-        throw new System.NotImplementedException();
+        blink.PlayBlink();
     }
 }
