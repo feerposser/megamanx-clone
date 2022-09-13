@@ -17,7 +17,6 @@ namespace LifeSystem
 
         private void ExecuteDamage(GameObject collision)
         {
-            Debug.Log(gameObject.name + " " + collision.gameObject.name);
             if (damageble)
             {
                 if (tagsForDamage.Contains(collision.gameObject.tag))
@@ -33,7 +32,7 @@ namespace LifeSystem
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
-        {
+        { 
             ExecuteDamage(collision.gameObject);
         }
     }

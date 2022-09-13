@@ -224,6 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagsForDamage:
   - Enemy
+  damageble: 1
 --- !u!114 &223247069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,6 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onDamage: {fileID: -4845915458887274777}
   health: 100
+  decreaseHealthMultiplier: 1
   healthStatusBar: {fileID: 0}
 --- !u!1 &5552932922439842489
 GameObject:

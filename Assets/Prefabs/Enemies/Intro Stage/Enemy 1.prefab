@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 219492845058177591}
   - component: {fileID: 219492845058177588}
   - component: {fileID: 3964110493897863729}
+  - component: {fileID: 1014001110}
+  - component: {fileID: 1014001118}
   m_Layer: 0
   m_Name: Enemy 1
   m_TagString: Enemy
@@ -155,8 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13d1e78880602864492428af84541d11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  damage: 5
   speed: 8
   isRight: 0
 --- !u!114 &3964110493897863729
@@ -171,4 +171,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be1463e4b141d6742a5ba9d0530d0f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagsForDamage: []
+  tagsForDamage:
+  - Player Shot
+  damageble: 1
+--- !u!114 &1014001110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219492845058177589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f39d9ce4ffd7ae34b94819d170ab22bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDamage: {fileID: 3964110493897863729}
+  health: 100
+  decreaseHealthMultiplier: 2
+  blink: {fileID: 1014001118}
+--- !u!114 &1014001118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219492845058177589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ff598d4638eb684fb38a48a45ccc34e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blink: {fileID: 2100000, guid: e17eb41bbed299149a828478f153ef6a, type: 2}
+  blinkTime: 0.1

@@ -6,20 +6,33 @@ using LifeSystem;
 
 public class Enemy1HealthSystem : EnemyHealthSystem
 {
+    Animator anim;
+    
     public Blink blink;
+
+    private void Awake()
+    {
+        anim = gameObject.GetComponent<Animator>();
+    }
 
     protected override void CheckHealth()
     {
-        Debug.Log("bb");
+        Debug.Log(health);
+        if (health <= 20)
+        {
+            Death();
+        }
     }
 
     protected override void Death()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("morreu");
+        Destroy(gameObject);
     }
 
     protected override void ExecuteDamage()
     {
+        CheckHealth();
         blink.PlayBlink();
     }
 }

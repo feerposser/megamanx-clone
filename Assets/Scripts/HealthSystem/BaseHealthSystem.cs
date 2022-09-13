@@ -9,6 +9,7 @@ namespace LifeSystem
         [SerializeField] OnDamageSystem onDamage;
 
         [SerializeField] protected int health = 100;
+        [SerializeField] protected float decreaseHealthMultiplier;
 
         private void Start()
         {
@@ -30,7 +31,12 @@ namespace LifeSystem
 
         protected void DecreaseHealth(int decreaseValue)
         {
-            health -= decreaseValue;
+            health -= (int) (decreaseValue * decreaseHealthMultiplier);
+        }
+
+        private void OnDestroy()
+        {
+            onDamage.onDamage -= OnDamage;
         }
     }
 }
