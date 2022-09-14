@@ -7,8 +7,6 @@ using LifeSystem;
 public class Enemy1HealthSystem : EnemyHealthSystem
 {
     Animator anim;
-    
-    public Blink blink;
 
     private void Awake()
     {
@@ -24,15 +22,7 @@ public class Enemy1HealthSystem : EnemyHealthSystem
         }
     }
 
-    protected override void Death()
-    {
-        Debug.Log("morreu");
-        Destroy(gameObject);
-    }
+    
 
-    protected override void ExecuteDamage()
-    {
-        CheckHealth();
-        blink.PlayBlink();
-    }
+    
 }

@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 4102430709604394531}
   - component: {fileID: 4102430709604394530}
   - component: {fileID: 4102430709604394529}
-  m_Layer: 0
+  - component: {fileID: 344322166590638849}
+  m_Layer: 7
   m_Name: Enemy 3
-  m_TagString: Untagged
+  m_TagString: Damageable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,3 +167,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &344322166590638849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102430709604394528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be1463e4b141d6742a5ba9d0530d0f4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagsForDamage: []
+  damageble: 1

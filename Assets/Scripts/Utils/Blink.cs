@@ -7,7 +7,6 @@ public class Blink : MonoBehaviour
     SpriteRenderer sprite;
     [SerializeField] private Material blink;
     private Material originalMaterial;
-    [SerializeField] private float blinkTime = 0.1f;
 
     private void Start()
     {
@@ -15,15 +14,22 @@ public class Blink : MonoBehaviour
         originalMaterial = sprite.material;
     }
 
-    public void PlayBlink()
+    public void PlayBlink(float blinkTime=0.03f, int blinkSequences=1)
     {
-        StartCoroutine("ExecuteBlink");
+        StartCoroutine("ExecuteBlink", new object[2] { blinkTime, blinkSequences });
     }
 
-    private IEnumerator ExecuteBlink()
+    private IEnumerator ExecuteBlink(object[] blinkParams)
     {
-        sprite.material = blink;
-        yield return new WaitForSeconds(blinkTime);
-        sprite.material = originalMaterial;
+        float blinkTime = (float) blinkParams[0];
+        int blinkSequences = (int) blinkParams[1];
+
+        for (int i=0; i<blinkSequences; i++)
+        {
+            sprite.material = blink;
+            yield return new WaitForSeconds(blinkTime);
+            sprite.material = originalMaterial;
+            yield return new WaitForSeconds(blinkTime);
+        }
     }
 }

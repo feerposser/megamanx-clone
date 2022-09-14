@@ -9,9 +9,10 @@ public class DeployExplosion : MonoBehaviour
     public void Explode()
     {
         Instantiate(explosion, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
 
-    public void Explosions(int numberOfExplosions)
+    public void Explosions()
     {
         throw new UnityException("Not implemented");
     }
