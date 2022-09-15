@@ -19,7 +19,8 @@ namespace LifeSystem
 
         protected override void Death()
         {
-            Instantiate(explosion, transform.position, transform.rotation).GetComponent<DeployExplosion>().Explode();
+            Instantiate(explosion, transform.position, transform.rotation)
+                .GetComponent<DeployExplosion>().Explode();
             Destroy(gameObject);
         }
     }

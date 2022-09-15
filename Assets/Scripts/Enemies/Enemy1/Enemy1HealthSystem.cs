@@ -16,13 +16,15 @@ public class Enemy1HealthSystem : EnemyHealthSystem
     protected override void CheckHealth()
     {
         Debug.Log(health);
-        if (health <= 20)
+        if (health <= 50)
         {
-            Death();
+            //Death();
+            anim.SetTrigger("fall");
         }
     }
 
-    
-
-    
+    public void AquiEuAlteroOsColisores()
+    {
+        Debug.Log("111111111111111111");
+    }    
 }
