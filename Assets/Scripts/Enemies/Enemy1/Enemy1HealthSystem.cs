@@ -21,10 +21,5 @@ public class Enemy1HealthSystem : EnemyHealthSystem
             //Death();
             anim.SetTrigger("fall");
         }
-    }
-
-    public void AquiEuAlteroOsColisores()
-    {
-        Debug.Log("111111111111111111");
-    }    
+    }  
 }

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3964110493897863729}
   - component: {fileID: 1014001110}
   - component: {fileID: 1014001118}
+  - component: {fileID: 1587419558}
   m_Layer: 7
   m_Name: Enemy 1
   m_TagString: Damageable
@@ -117,7 +118,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 219492845058177589}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 470d500dd47df8d408d4c7503ede6435, type: 2}
   m_IsTrigger: 0
@@ -204,4 +205,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blink: {fileID: 2100000, guid: e17eb41bbed299149a828478f153ef6a, type: 2}
-  blinkTime: 0.1
+--- !u!70 &1587419558
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219492845058177589}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.3, y: 0.167}
+  m_Direction: 1

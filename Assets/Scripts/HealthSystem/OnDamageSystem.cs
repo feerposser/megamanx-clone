@@ -32,7 +32,7 @@ namespace LifeSystem
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
-        { 
+        {
             ExecuteDamage(collision.gameObject);
         }
     }
