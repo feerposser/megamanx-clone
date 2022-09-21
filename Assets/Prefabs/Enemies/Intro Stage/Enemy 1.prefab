@@ -159,6 +159,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
+  sideContactLayer:
+    serializedVersion: 2
+    m_Bits: 8
   isRight: 0
 --- !u!114 &3964110493897863729
 MonoBehaviour:
