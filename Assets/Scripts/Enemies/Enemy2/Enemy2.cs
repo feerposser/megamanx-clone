@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class Enemy2 : MonoBehaviour
 {
-    public enum EnemyState { FLYING, PREPARETOBOMBING, BOMBING }
+    public enum EnemyState { FLYING, MOVETOPLAYERPOSITION, PREPARETOBOMBING, BOMBING, MOVEWAY }
 
     Rigidbody2D rb;
     Animator anim;
     Transform playerPosition;
     EnemyState enemyState;
 
+    float playerLastDistance;
+
     [SerializeField] LayerMask playerLayer;
     [SerializeField] GameObject bombPrefab;
     [SerializeField] Transform bombSpawn;
     [SerializeField] float speed;
+    [SerializeField] bool bombing;
 
     void Start()
     {
+        bombing = false;
+        playerLastDistance = float.MaxValue;
         enemyState = EnemyState.FLYING;
         playerPosition = GameObject.Find("Player").transform;
         rb = GetComponent<Rigidbody2D>();
@@ -25,20 +30,57 @@ public class Enemy2 : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (enemyState.Equals(EnemyState.FLYING))
+        if (enemyState.Equals(EnemyState.MOVEWAY))
         {
             Move(Vector2.left);
+            // after that, just up and destroy
+        } 
+        else if (enemyState.Equals(EnemyState.FLYING))
+        {
+            Move(Vector2.left);
+            PlayerPositionDetection();
+        } 
+        else if (enemyState.Equals(EnemyState.MOVETOPLAYERPOSITION))
+        {
+            if (GetXDistance() > 1)
+            {
+                Debug.Log(GetXDistance());
+                Move(Vector2.left);
+            } 
+            else
+            {
+                float playerDistance = Vector2.Distance(transform.position, playerPosition.position);
+                if (playerDistance < playerLastDistance)
+                {
+                    Move(Vector2.left);
+                } else
+                {
+                    enemyState = EnemyState.PREPARETOBOMBING;
+                }
+                playerLastDistance = playerDistance;
+            }
+        } 
+        else if (enemyState.Equals(EnemyState.PREPARETOBOMBING))
+        {
+            DeployBomb();
+            enemyState = EnemyState.MOVEWAY;
         }
-        IntoThePlayerPosition();
+        anim.SetBool("bombing", bombing);
     }
 
-    void IntoThePlayerPosition()
+    private float GetXDistance()
+    {
+        float x = playerPosition.position.x - transform.position.x;
+        return x < 0 ? -x : x;
+    }
+
+    void PlayerPositionDetection()
     {
         Collider2D collider = Physics2D.OverlapBox(transform.position - new Vector3(0, 3, 0), new Vector2(5, 5), 0, playerLayer);
 
         if (collider)
         {
-            DeployBomb();
+            enemyState = EnemyState.MOVETOPLAYERPOSITION;
         }
     }
 
