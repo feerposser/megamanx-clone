@@ -27,7 +27,8 @@ public class Enemy2Bomb : MonoBehaviour
 
     private void Explode()
     {
-        Instantiate(explosion, transform.position, Quaternion.identity).GetComponent<DeployExplosion>().Explode();
+        DeployExplosion explosionDeployed = Instantiate(explosion, transform.position, Quaternion.identity).GetComponent<DeployExplosion>();
+        explosionDeployed.Explode(createDamage: true);
         Destroy(gameObject);
     }
 

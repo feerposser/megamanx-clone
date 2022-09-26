@@ -12,20 +12,24 @@ public class Enemy2 : MonoBehaviour
     EnemyState enemyState;
 
     float playerLastDistance;
+    int numberOfBombsDeployed;
 
-    [SerializeField] LayerMask playerLayer;
-    [SerializeField] GameObject bombPrefab;
-    [SerializeField] Transform bombSpawn;
     [SerializeField] float speed;
     [SerializeField] bool bombing;
+    [SerializeField] float bombingTime;
+    [SerializeField] Transform bombSpawn;
+    [SerializeField] LayerMask playerLayer;
+    [SerializeField] GameObject bombPrefab;
 
     void Start()
     {
         bombing = false;
-        playerLastDistance = float.MaxValue;
+        numberOfBombsDeployed = 0;
         enemyState = EnemyState.FLYING;
-        playerPosition = GameObject.Find("Player").transform;
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        playerLastDistance = float.MaxValue;
+        playerPosition = GameObject.Find("Player").transform;
     }
 
     void FixedUpdate()
@@ -33,7 +37,6 @@ public class Enemy2 : MonoBehaviour
         if (enemyState.Equals(EnemyState.MOVEWAY))
         {
             Move(Vector2.left);
-            // after that, just up and destroy
         } 
         else if (enemyState.Equals(EnemyState.FLYING))
         {
@@ -44,7 +47,6 @@ public class Enemy2 : MonoBehaviour
         {
             if (GetXDistance() > 1)
             {
-                Debug.Log(GetXDistance());
                 Move(Vector2.left);
             } 
             else
@@ -62,10 +64,32 @@ public class Enemy2 : MonoBehaviour
         } 
         else if (enemyState.Equals(EnemyState.PREPARETOBOMBING))
         {
-            DeployBomb();
-            enemyState = EnemyState.MOVEWAY;
+            enemyState = EnemyState.BOMBING;
+            bombing = true;
+            StartCoroutine("Bombing");
+        }
+        else if (enemyState.Equals(EnemyState.BOMBING))
+        {
+            Move(Vector2.zero);
         }
         anim.SetBool("bombing", bombing);
+    }
+
+    IEnumerator Bombing()
+    {
+        yield return new WaitForSeconds(bombingTime);
+        DeployBomb();
+
+        yield return new WaitForSeconds(bombingTime);
+        DeployBomb();
+
+        yield return new WaitForSeconds(bombingTime);
+        DeployBomb();
+
+        yield return new WaitForSeconds(bombingTime / 2);
+
+        bombing = false;
+        enemyState = EnemyState.MOVEWAY;
     }
 
     private float GetXDistance()

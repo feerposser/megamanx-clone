@@ -6,9 +6,10 @@ public class DeployExplosion : MonoBehaviour
 {
     [SerializeField] GameObject explosion;
 
-    public void Explode()
+    public void Explode(bool createDamage)
     {
-        Instantiate(explosion, transform.position, transform.rotation);
+        Explosion gameObj = Instantiate(explosion, transform.position, transform.rotation).GetComponent<Explosion>();
+        gameObj.createDamage = createDamage;
         Destroy(gameObject);
     }
 
