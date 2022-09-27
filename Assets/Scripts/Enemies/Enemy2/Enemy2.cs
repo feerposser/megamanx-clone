@@ -12,7 +12,6 @@ public class Enemy2 : MonoBehaviour
     EnemyState enemyState;
 
     float playerLastDistance;
-    int numberOfBombsDeployed;
 
     [SerializeField] float speed;
     [SerializeField] bool bombing;
@@ -24,7 +23,6 @@ public class Enemy2 : MonoBehaviour
     void Start()
     {
         bombing = false;
-        numberOfBombsDeployed = 0;
         enemyState = EnemyState.FLYING;
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -78,13 +76,15 @@ public class Enemy2 : MonoBehaviour
     IEnumerator Bombing()
     {
         yield return new WaitForSeconds(bombingTime);
-        DeployBomb();
+        DeployBomb(Vector2.zero);
+
+        Vector2 direction = (transform.position.x > playerPosition.position.x) ? Vector2.left : Vector2.right;
 
         yield return new WaitForSeconds(bombingTime);
-        DeployBomb();
+        DeployBomb(direction / 2f);
 
         yield return new WaitForSeconds(bombingTime);
-        DeployBomb();
+        DeployBomb(direction / 0.7f);
 
         yield return new WaitForSeconds(bombingTime / 2);
 
@@ -119,8 +119,9 @@ public class Enemy2 : MonoBehaviour
         rb.velocity = direction * speed;
     }
 
-    void DeployBomb()
+    void DeployBomb(Vector2 direction)
     {
-        Instantiate(bombPrefab, bombSpawn.position, Quaternion.identity);
+        Rigidbody2D go = Instantiate(bombPrefab, bombSpawn.position, Quaternion.identity).GetComponent<Rigidbody2D>();
+        go.velocity = direction * 2;
     }
 }
