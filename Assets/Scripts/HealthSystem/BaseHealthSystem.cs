@@ -6,6 +6,13 @@ namespace LifeSystem
 {
     public abstract class BaseHealthSystem : MonoBehaviour
     {
+        public class DamageArgs
+        {
+            public int damage { get; set; }
+        }
+
+        protected DamageArgs damageArgs;
+
         [SerializeField] OnDamageSystem onDamage;
 
         [SerializeField] protected int health = 100;
@@ -15,6 +22,8 @@ namespace LifeSystem
         {
             onDamage = GetComponent<OnDamageSystem>();
             onDamage.onDamage += OnDamage;
+
+            damageArgs = new DamageArgs();
         }
 
         protected abstract void Death();
@@ -25,6 +34,7 @@ namespace LifeSystem
 
         protected void OnDamage(object sender, OnDamageSystem.DamageEventArgs args)
         {
+            damageArgs.damage = args.damage;
             DecreaseHealth(args.damage);
             ExecuteDamage();
         }

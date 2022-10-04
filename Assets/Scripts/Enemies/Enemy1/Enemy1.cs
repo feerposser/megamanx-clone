@@ -10,9 +10,9 @@ public class Enemy1 : MonoBehaviour
     CapsuleCollider2D capsuleCollider;
     RaycastHit2D sideContact;
 
+    public float speed;
     public LayerMask sideContactLayer;
     public bool isRight;
-    public float speed;
 
     void Start()
     {
