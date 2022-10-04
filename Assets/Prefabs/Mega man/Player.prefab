@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tagsForDamage:
-  - Enemy
+  - Damageable
   damageble: 1
 --- !u!114 &223247069
 MonoBehaviour:

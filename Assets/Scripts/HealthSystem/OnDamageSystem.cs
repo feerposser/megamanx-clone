@@ -17,12 +17,10 @@ namespace LifeSystem
 
         private void ExecuteDamage(GameObject collision)
         {
-            if (damageble && collision.tag != "")
+            Debug.Log("aaa");
+            if (damageble && tagsForDamage.Contains(collision.tag))
             {
-                if (tagsForDamage.Contains(collision.tag))
-                {
-                    onDamage?.Invoke(this, new DamageEventArgs { damage = 5 });
-                }
+                onDamage?.Invoke(this, new DamageEventArgs { damage = 5 });
             }
         }
 
