@@ -97,7 +97,7 @@ public class Enemy8 : MonoBehaviour
         {
             Vector2 raycastDirection = GetRaycastDirection();
             Vector2 raycastPosition = transform.position + (Vector3)raycastDirection + Vector3.down;
-            colliding = Physics2D.Raycast(raycastPosition, raycastDirection, 1, wallLayer);
+            colliding = Physics2D.Raycast(raycastPosition, raycastDirection, 3, wallLayer);
         }
         return colliding ? false : true;
     }

@@ -17,9 +17,9 @@ namespace LifeSystem
 
         private void ExecuteDamage(GameObject collision)
         {
-            if (damageble)
+            if (damageble && collision.tag != "")
             {
-                if (collision.CompareTag("Damageable"))
+                if (tagsForDamage.Contains(collision.tag))
                 {
                     onDamage?.Invoke(this, new DamageEventArgs { damage = 5 });
                 }

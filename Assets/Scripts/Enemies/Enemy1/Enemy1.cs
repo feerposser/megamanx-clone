@@ -5,7 +5,6 @@ using UnityEngine;
 public class Enemy1 : MonoBehaviour
 {
     Rigidbody2D rb;
-    [SerializeField] float speed;
 
     CircleCollider2D circleCollider;
     CapsuleCollider2D capsuleCollider;
@@ -13,6 +12,7 @@ public class Enemy1 : MonoBehaviour
 
     public LayerMask sideContactLayer;
     public bool isRight;
+    public float speed;
 
     void Start()
     {
