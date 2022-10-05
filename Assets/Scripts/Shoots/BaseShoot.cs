@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class BaseShoot : MonoBehaviour
 {
-
-    private Animator anim;
-    protected Rigidbody2D rb;
-
     public enum SideState { LEFT, RIGHT }
 
-    public float speed;
-    public float destroyGameObjectTime;
-    public SideState sideState = SideState.RIGHT;
+    Rigidbody2D rb;
+    [SerializeField] bool hasImpact;
+    [SerializeField] float speed;
+    [SerializeField] float destroyGameObjectTime;
+    [SerializeField] SideState sideState = SideState.RIGHT;
+
+    private Animator anim;
+
     
     void Start()
     {
+        hasImpact = false;
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -32,21 +34,27 @@ public class BaseShoot : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (sideState.Equals(SideState.RIGHT))
+        if (!hasImpact)
         {
-            rb.velocity = Vector2.right * speed;
-        } else
-        {
-            rb.velocity = Vector2.left * speed;
+            if (sideState.Equals(SideState.RIGHT))
+            {
+                rb.velocity = Vector2.right * speed;
+            } else
+            {
+                rb.velocity = Vector2.left * speed;
+            }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        /*if (collision.CompareTag("Enemy"))
+        if (!collision.CompareTag("Reflect"))
         {
+            hasImpact = true;
+            rb.velocity = Vector2.zero;
             anim.SetTrigger("contact");
             Destroy(gameObject, destroyGameObjectTime);
-        }*/
+        }
+        
     }
 }

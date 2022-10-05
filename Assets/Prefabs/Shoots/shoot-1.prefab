@@ -117,8 +117,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61264017d4f943b4299e04bbdf3c6fb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasImpact: 0
   speed: 18
-  destroyGameObjectTime: 0
+  destroyGameObjectTime: 0.2
   sideState: 1
 --- !u!61 &6752453250912241889
 BoxCollider2D:
