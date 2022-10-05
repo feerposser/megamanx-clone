@@ -47,7 +47,6 @@ public class Enemy1HealthSystem : EnemyHealthSystem
         if (healthMode.Equals(HealthMode.DEATH)) Death();
     }
 
-
     protected override void CheckHealth()
     {
         if (healthMode.Equals(HealthMode.PREPARETODEATH))

@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 2029115729}
   - component: {fileID: 2029115730}
   - component: {fileID: 63056805646846433}
+  - component: {fileID: -2113443399311020924}
+  - component: {fileID: 1826454487}
+  - component: {fileID: 1826454495}
   m_Layer: 7
   m_Name: Enemy 8
   m_TagString: Damageable
@@ -159,3 +162,59 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!61 &-2113443399311020924
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8964464591713584932}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.007714063, y: -0.009817854}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.25, y: 0.51}
+    newSize: {x: 0.25, y: 0.51}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.18969011, y: 0.48755905}
+  m_EdgeRadius: 0
+--- !u!114 &1826454487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8964464591713584932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14e7c11219ae7cc4caba9ba6fd8f0e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDamage: {fileID: 0}
+  health: 100
+  decreaseHealthMultiplier: 1
+  deployExplosion: {fileID: 74882896132504172, guid: 2736156a6d336c046b30ce24ec18cc9c, type: 3}
+  blink: {fileID: 1826454495}
+--- !u!114 &1826454495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8964464591713584932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ff598d4638eb684fb38a48a45ccc34e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blink: {fileID: 2100000, guid: e17eb41bbed299149a828478f153ef6a, type: 2}

@@ -5,9 +5,9 @@ using LifeSystem;
 
 namespace LifeSystem
 {
-    public abstract class EnemyHealthSystem : BaseHealthSystem
+    public class EnemyHealthSystem : BaseHealthSystem
     {
-        [SerializeField] GameObject explosion;
+        [SerializeField] GameObject deployExplosion;
 
         [SerializeField] Blink blink;
 
@@ -19,9 +19,17 @@ namespace LifeSystem
 
         protected override void Death()
         {
-            Instantiate(explosion, transform.position, transform.rotation)
+            Instantiate(deployExplosion, transform.position, transform.rotation)
                 .GetComponent<DeployExplosion>().Explode(createDamage: false);
             Destroy(gameObject);
+        }
+
+        protected override void CheckHealth()
+        {
+            if (health <= 0)
+            {
+                Death();
+            }
         }
     }
 }

@@ -17,7 +17,6 @@ namespace LifeSystem
 
         private void ExecuteDamage(GameObject collision)
         {
-            Debug.Log("aaa");
             if (damageble && tagsForDamage.Contains(collision.tag))
             {
                 onDamage?.Invoke(this, new DamageEventArgs { damage = 5 });

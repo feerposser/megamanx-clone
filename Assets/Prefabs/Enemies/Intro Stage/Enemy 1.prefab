@@ -195,6 +195,7 @@ MonoBehaviour:
   decreaseHealthMultiplier: 2
   explosion: {fileID: 74882896132504172, guid: 2736156a6d336c046b30ce24ec18cc9c, type: 3}
   blink: {fileID: 1014001118}
+  healthMode: 0
 --- !u!114 &1014001118
 MonoBehaviour:
   m_ObjectHideFlags: 0
