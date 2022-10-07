@@ -12,11 +12,12 @@ public class Enemy3 : MonoBehaviour
     ATTACK: ATTACK THE PLAYER LAST POSITION
     REPOSITION: AFTER ATTACKING, MOVE WAY AND START ALL OVER AGAIN
      */
-    public enum EnemyState { APROACH, PREPARETOSTOP, STOP, PREPAREATTACK, ATTACK, REPOSITION  }
+    public enum EnemyState { PREPARETOAPROACH, APROACH, PREPARETOSTOP, STOP, PREPAREATTACK, ATTACK, REPOSITION  }
 
     Rigidbody2D rb;
 
     Transform playerPosition;
+    Vector2 lastPlayerPosition;
 
     [SerializeField] EnemyState enemyState;
     [SerializeField] float speed;
@@ -26,14 +27,18 @@ public class Enemy3 : MonoBehaviour
 
     void Start()
     {
-        enemyState = EnemyState.APROACH;
+        enemyState = EnemyState.PREPARETOAPROACH;
         rb = GetComponent<Rigidbody2D>();
         playerPosition = GameObject.Find("Player").transform;
     }
 
     private void Update()
     {
+        if (enemyState.Equals(EnemyState.PREPARETOAPROACH)) ComputePrepareToAproach();
+
         if (enemyState.Equals(EnemyState.APROACH)) ComputeAproach();
+
+        if (enemyState.Equals(EnemyState.PREPAREATTACK)) ComputePrepareToAttack();
 
         if (enemyState.Equals(EnemyState.PREPARETOSTOP)) ComputePrepareToStop();
 
@@ -41,39 +46,29 @@ public class Enemy3 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (enemyState.Equals(EnemyState.APROACH))
-        {
-            ExecuteAproach();
-        } 
+        if (enemyState.Equals(EnemyState.APROACH)) ExecuteAproach();
         
-        if (enemyState.Equals(EnemyState.PREPARETOSTOP))
-        {
-            ExecutePrepareToStop();
-        } 
+        if (enemyState.Equals(EnemyState.PREPARETOSTOP)) ExecutePrepareToStop();
         
-        if (enemyState.Equals(EnemyState.PREPAREATTACK))
-        {
-            PrepareToAttack();
-        }
+        if (enemyState.Equals(EnemyState.ATTACK)) Attack();
+    }
 
-        if (enemyState.Equals(EnemyState.ATTACK))
-        {
-            Attack();
-        }
-        
+    private void ComputePrepareToAproach() 
+    {
+        UpdateLastPlayerPosition();
+        enemyState = EnemyState.APROACH;
     }
 
     private void ComputeAproach()
     {
-        if (StopDistance() == 1)
-        {
-            enemyState = EnemyState.PREPARETOSTOP;
-        }
+        if (StopDistance() == 1) enemyState = EnemyState.PREPARETOSTOP;
     }
 
     private void ExecuteAproach()
     {
-        MoveToPosition(playerPosition.position - transform.position);
+        Vector2 position = new Vector2(lastPlayerPosition.x, lastPlayerPosition.y + 1);
+
+        MoveToPosition(position - (Vector2) transform.position);
     }
 
     private void ComputePrepareToStop()
@@ -90,7 +85,6 @@ public class Enemy3 : MonoBehaviour
         MoveToPosition(playerPosition.position - transform.position, 0.7f);
     }
  
-
     private IEnumerator Stop()
     {
         rb.velocity = Vector2.zero;
@@ -98,15 +92,20 @@ public class Enemy3 : MonoBehaviour
         enemyState = EnemyState.PREPAREATTACK;
     }
 
-    private void PrepareToAttack()
+    private void ComputePrepareToAttack()
     {
-        lastPlayerPosition = GetActualPlayerPosition();
+        UpdateLastPlayerPosition();
         enemyState = EnemyState.ATTACK;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // if hit the player, move away and start all over again
     }
 
     private void Attack()
     {
-        MoveToPosition(playerPosition.position - transform.position);
+        MoveToPosition(lastPlayerPosition - (Vector2) transform.position);
     }
 
     private void MoveToPosition(Vector2 position, float multiplier=1)
@@ -127,6 +126,11 @@ public class Enemy3 : MonoBehaviour
         }
 
         return 0;
+    }
+
+    private void UpdateLastPlayerPosition() 
+    {
+        lastPlayerPosition = GetActualPlayerPosition();
     }
 
     private Vector2 GetActualPlayerPosition()
