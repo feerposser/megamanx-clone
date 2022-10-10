@@ -76,7 +76,7 @@ public class Enemy3 : MonoBehaviour
         }
         
         if (enemyState.Equals(EnemyState.PREPARETOSTOP))
-            MoveToPosition(playerPosition.position - transform.position, 0.7f);
+            MoveToPosition(lastPlayerPosition - (Vector2) transform.position, 0.7f);
 
         if (enemyState.Equals(EnemyState.ATTACK))
             MoveToPosition((lastPlayerPosition - lastEnemyPosition).normalized, multiplier: 3);
@@ -114,7 +114,7 @@ public class Enemy3 : MonoBehaviour
 
     private int StopDistance()
     {
-        float distance = Vector2.Distance(playerPosition.position, transform.position);
+        float distance = Vector2.Distance(lastPlayerPosition, transform.position);
 
         if (distance < stopDistance2) return 2;
         else if (distance < stopDistance1) return 1;
