@@ -19,6 +19,7 @@ public class Enemy3 : MonoBehaviour
     Rigidbody2D rb;
     Transform playerPosition;
     Vector2 lastPlayerPosition;
+    Vector2 lastEnemyPosition;
     Vector2 moveWayPosition;
 
     [SerializeField] EnemyState enemyState;
@@ -47,7 +48,10 @@ public class Enemy3 : MonoBehaviour
                 enemyState = EnemyState.PREPARETOSTOP;
 
         if (enemyState.Equals(EnemyState.PREPAREATTACK))
+        {
             UpdateLastPlayerPosition();
+            UpdateLastEnemyPosition();
+        }
 
         if (enemyState.Equals(EnemyState.PREPARETOSTOP))
             ComputePrepareToStop();
@@ -74,9 +78,9 @@ public class Enemy3 : MonoBehaviour
         if (enemyState.Equals(EnemyState.PREPARETOSTOP))
             MoveToPosition(playerPosition.position - transform.position, 0.7f);
 
-        if (enemyState.Equals(EnemyState.ATTACK)) 
-            MoveToPosition(lastPlayerPosition - (Vector2)transform.position);
-
+        if (enemyState.Equals(EnemyState.ATTACK))
+            MoveToPosition((lastPlayerPosition - lastEnemyPosition).normalized, multiplier: 3);
+        
         if (enemyState.Equals(EnemyState.REPOSITION))
             MoveToPosition(moveWayPosition - (Vector2)transform.position, multiplier: 3);
     }
@@ -121,5 +125,10 @@ public class Enemy3 : MonoBehaviour
     private void UpdateLastPlayerPosition() 
     {
         lastPlayerPosition = playerPosition.position;
+    }
+
+    private void UpdateLastEnemyPosition()
+    {
+        lastEnemyPosition = transform.position;
     }
 }
