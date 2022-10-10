@@ -5,19 +5,22 @@ using UnityEngine;
 public class Enemy3 : MonoBehaviour
 {
     /*
-    APROACH: GOING INTO THE PLAYER POSITION
-    PREPARETOSTOP: AFTER APROACHSTATE, STOP TO PREPARE TO ATTACK
-    STOP: STOP MOVING
-    PREPAREATTACK: GET THE ACTUAL PLAYER POSITION TO ATTACK
-    ATTACK: ATTACK THE PLAYER LAST POSITION
-    REPOSITION: AFTER ATTACKING, MOVE WAY AND START ALL OVER AGAIN
+     * PREPARETOAPROACH: UPDATE PLAYER LAST POSITION
+     * APROACH: GOING INTO THE PLAYER POSITION
+     * PREPARETOSTOP: AFTER APROACHSTATE, STOP TO PREPARE TO ATTACK
+     * STOP: STOP MOVING
+     * PREPAREATTACK: GET THE ACTUAL PLAYER POSITION TO ATTACK
+     * ATTACK: ATTACK THE PLAYER LAST POSITION
+     * PREPARETOREPOSITION: SET A FIXED DESTINATION TO REPOSITION
+     * REPOSITION: AFTER ATTACKING, MOVE WAY AND START ALL OVER AGAIN   
      */
-    public enum EnemyState { PREPARETOAPROACH, APROACH, PREPARETOSTOP, STOP, PREPAREATTACK, ATTACK, REPOSITION  }
+    public enum EnemyState { PREPARETOAPROACH, APROACH, PREPARETOSTOP, STOP, PREPAREATTACK, ATTACK, PREPARETOREPOSITION, REPOSITION  }
 
     Rigidbody2D rb;
 
     Transform playerPosition;
     Vector2 lastPlayerPosition;
+    Vector2 moveWayPosition;
 
     [SerializeField] EnemyState enemyState;
     [SerializeField] float speed;
@@ -42,6 +45,9 @@ public class Enemy3 : MonoBehaviour
 
         if (enemyState.Equals(EnemyState.PREPARETOSTOP)) ComputePrepareToStop();
 
+        if (enemyState.Equals(EnemyState.PREPARETOREPOSITION)) ComputePrepareToReposition();
+
+        if (enemyState.Equals(EnemyState.REPOSITION)) ComputeReposition();
     }
 
     private void FixedUpdate()
@@ -51,6 +57,8 @@ public class Enemy3 : MonoBehaviour
         if (enemyState.Equals(EnemyState.PREPARETOSTOP)) ExecutePrepareToStop();
         
         if (enemyState.Equals(EnemyState.ATTACK)) Attack();
+        
+        if (enemyState.Equals(EnemyState.REPOSITION)) ExecuteReposition();
     }
 
     private void ComputePrepareToAproach() 
@@ -100,12 +108,29 @@ public class Enemy3 : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // if hit the player, move away and start all over again
+        if (collision.gameObject.CompareTag("Player")) enemyState = EnemyState.PREPARETOREPOSITION;
     }
 
     private void Attack()
     {
         MoveToPosition(lastPlayerPosition - (Vector2) transform.position);
+    }
+
+    private void ComputePrepareToReposition()
+    {
+        moveWayPosition = lastPlayerPosition + new Vector2(0, 3);
+        enemyState = EnemyState.REPOSITION;
+    }
+
+    private void ComputeReposition()
+    {
+        if (Vector2.Distance(transform.position, moveWayPosition) < 0.5f) StartCoroutine(Stop());
+    }
+
+    private void ExecuteReposition()
+    {
+        Debug.Log(moveWayPosition);
+        MoveToPosition(moveWayPosition - (Vector2) transform.position);
     }
 
     private void MoveToPosition(Vector2 position, float multiplier=1)
@@ -117,13 +142,8 @@ public class Enemy3 : MonoBehaviour
     {
         float distance = Vector2.Distance(playerPosition.position, transform.position);
 
-        if (distance < stopDistance2)
-        {
-            return 2;
-        } else if (distance < stopDistance1)
-        {
-            return 1;
-        }
+        if (distance < stopDistance2) return 2;
+        else if (distance < stopDistance1) return 1;
 
         return 0;
     }
