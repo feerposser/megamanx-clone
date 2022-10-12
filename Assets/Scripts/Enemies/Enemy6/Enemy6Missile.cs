@@ -13,7 +13,7 @@ public class Enemy6Missile : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Destroy(gameObject, 5);
+        Destroy(gameObject, 3);
     }
 
     private void Update()

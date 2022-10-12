@@ -50,15 +50,22 @@ public class Enemy6 : MonoBehaviour
         else if (enemyState.Equals(EnemyState.SHOOTING))
         {
             state = 2;
-            if (!isShooting) 
-                StartCoroutine(Shoot(EndShoting));
+            if (!isShooting)
+                StartShooting();
         }
 
         anim.SetInteger("state", state);
     }
 
+    private void StartShooting()
+    {
+        isShooting = true;
+        StartCoroutine(Shoot(EndShoting));
+    }
+
     private void EndShoting()
     {
+        isShooting = false;
         enemyState = EnemyState.IDLE;
         state = 3;
         idleTimer = Time.time + idleTime;
@@ -66,17 +73,32 @@ public class Enemy6 : MonoBehaviour
 
     private IEnumerator Shoot(Action callback)
     {
-        isShooting = true;
-        int shotType = UnityEngine.Random.Range(0, shots.Length);
+        int shootType = UnityEngine.Random.Range(0, shots.Length);
         yield return new WaitForSeconds(1.5f);
-
-        Instantiate(shots[1], launchPosition1.position, Quaternion.identity);
-        //Instantiate(shots[shotType], launchPosition2.position, Quaternion.identity);
+        
+        if (shootType == 0)
+        {
+            ShootShock();
+        } else if (shootType == 1)
+        {
+            StartCoroutine(ShootMissile());
+        }
 
         yield return new WaitForSeconds(2);
-        isShooting = false;
-
         callback?.Invoke();
+    }
+
+    private IEnumerator ShootMissile()
+    {
+        Instantiate(shots[1], launchPosition1.position, Quaternion.identity).GetComponent<SpriteRenderer>().sortingOrder = 1;
+        yield return new WaitForSeconds(0.7f);
+        Instantiate(shots[1], launchPosition2.position, Quaternion.identity).GetComponent<SpriteRenderer>().sortingOrder = 1;
+    }
+
+    private void ShootShock()
+    {
+        Instantiate(shots[0], launchPosition1.position, Quaternion.identity);
+        Instantiate(shots[0], launchPosition2.position, Quaternion.identity);
     }
 
 }

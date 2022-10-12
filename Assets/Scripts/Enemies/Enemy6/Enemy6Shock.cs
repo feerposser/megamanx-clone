@@ -10,10 +10,9 @@ public class Enemy6Shock : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Destroy(gameObject, 5);
+        Destroy(gameObject, 3);
     }
 
-    // Update is called once per frame
     void Update()
     {
         rb.velocity = new Vector2(-1 * speed, rb.velocity.y);
