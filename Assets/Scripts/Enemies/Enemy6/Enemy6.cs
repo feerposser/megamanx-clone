@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Enemy6 : MonoBehaviour
 {
@@ -8,7 +9,6 @@ public class Enemy6 : MonoBehaviour
 
     Animator anim;
     float idleTimer;
-    float shootingTimer;
     float prepareToShotTimer;
 
     [SerializeField] Transform launchPosition1;
@@ -44,38 +44,39 @@ public class Enemy6 : MonoBehaviour
         else if (enemyState.Equals(EnemyState.PREPARETOSHOT))
         {
             state = 1;
-            if (prepareToShotTimer < Time.time)
-            {
+            if (prepareToShotTimer < Time.time) 
                 enemyState = EnemyState.SHOOTING;
-                shootingTimer = Time.time + shootingTime;
-            }
         } 
         else if (enemyState.Equals(EnemyState.SHOOTING))
         {
             state = 2;
-
             if (!isShooting) 
-                StartCoroutine(Shoot());
-            
-            if (shootingTimer < Time.time)
-            {
-                enemyState = EnemyState.IDLE;
-                state = 3;
-                idleTimer = Time.time + idleTime;
-            }
-
-
+                StartCoroutine(Shoot(EndShoting));
         }
 
         anim.SetInteger("state", state);
     }
 
-    private IEnumerator Shoot()
+    private void EndShoting()
+    {
+        enemyState = EnemyState.IDLE;
+        state = 3;
+        idleTimer = Time.time + idleTime;
+    }
+
+    private IEnumerator Shoot(Action callback)
     {
         isShooting = true;
-        Instantiate(shots[Random.Range(0, shots.Length)], launchPosition1.position, Quaternion.identity);
-        yield return new WaitForSeconds(4);
+        int shotType = UnityEngine.Random.Range(0, shots.Length);
+        yield return new WaitForSeconds(1.5f);
+
+        Instantiate(shots[1], launchPosition1.position, Quaternion.identity);
+        //Instantiate(shots[shotType], launchPosition2.position, Quaternion.identity);
+
+        yield return new WaitForSeconds(2);
         isShooting = false;
+
+        callback?.Invoke();
     }
 
 }

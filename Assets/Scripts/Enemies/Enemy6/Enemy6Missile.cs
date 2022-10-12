@@ -5,8 +5,10 @@ using UnityEngine;
 public class Enemy6Missile : MonoBehaviour
 {
     Rigidbody2D rb;
+    float trailTimer;
 
     [SerializeField] float speed;
+    [SerializeField] GameObject trail;
 
     void Start()
     {
@@ -14,8 +16,23 @@ public class Enemy6Missile : MonoBehaviour
         Destroy(gameObject, 5);
     }
 
-    void Update()
+    private void Update()
+    {
+        if (trailTimer < Time.time)
+        {
+            CreateTrail();
+        }
+    }
+
+    void FixedUpdate()
     {
         rb.velocity = Vector2.left * speed;
+    }
+
+    private void CreateTrail()
+    {
+        trailTimer = Time.time + 0.1f;
+        GameObject t = Instantiate(trail, transform.position + new Vector3(.3f, 0, 0), Quaternion.identity);
+        Destroy(t, 0.1f);
     }
 }
