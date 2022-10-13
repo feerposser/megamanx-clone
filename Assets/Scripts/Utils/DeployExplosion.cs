@@ -6,7 +6,7 @@ public class DeployExplosion : MonoBehaviour
 {
     [SerializeField] GameObject explosion;
 
-    public void Explode(bool createDamage)
+    public void Explode(bool createDamage = false)
     {
         Explosion gameObj = Instantiate(explosion, transform.position, transform.rotation).GetComponent<Explosion>();
         gameObj.createDamage = createDamage;

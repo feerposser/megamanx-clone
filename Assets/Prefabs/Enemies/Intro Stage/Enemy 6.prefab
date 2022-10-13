@@ -214,12 +214,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df9bb891be63074087e51d0034db757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleTimer: 0
-  shots: []
+  launchPosition1: {fileID: 5953394558653490568}
+  launchPosition2: {fileID: 7809106628543273404}
+  isShooting: 0
+  shots:
+  - {fileID: 2390896849566847723, guid: 6fe0332b1eb2f7c4da4a001dc8b47e09, type: 3}
+  - {fileID: 8936452645507600377, guid: a8534f8afa79ab4458fcedb36316f08c, type: 3}
   enemyState: 0
   state: 0
-  idleTime: 5
-  shootingTime: 3
+  idleTime: 2
+  shootingTime: 5
   prepareToShotTime: 2
 --- !u!1 &5838495996320966769
 GameObject:
@@ -230,7 +234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7809106628543273404}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: launchPosition2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +249,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5838495996320966769}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.018, y: 0.235, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4530120729063880059}
@@ -260,7 +264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5953394558653490568}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: launchPosition1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +279,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9143837566374658002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.176, y: 0.229, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4530120729063880059}

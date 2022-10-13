@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   trail: {fileID: 2792876168122726841, guid: 23e7db1cba1d8ce47bb7e53fa83dc191, type: 3}
+  deployExplosion: {fileID: 74882896132504172, guid: 2736156a6d336c046b30ce24ec18cc9c, type: 3}
 --- !u!61 &8936452645507600383
 BoxCollider2D:
   m_ObjectHideFlags: 0

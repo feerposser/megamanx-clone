@@ -9,6 +9,7 @@ public class Enemy6Missile : MonoBehaviour
 
     [SerializeField] float speed;
     [SerializeField] GameObject trail;
+    [SerializeField] GameObject deployExplosion;
 
     void Start()
     {
@@ -34,5 +35,14 @@ public class Enemy6Missile : MonoBehaviour
         trailTimer = Time.time + 0.1f;
         GameObject t = Instantiate(trail, transform.position + new Vector3(.3f, 0, 0), Quaternion.identity);
         Destroy(t, 0.1f);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    { 
+        if (collision.CompareTag("Player"))
+        {
+            Instantiate(deployExplosion, transform.position, Quaternion.identity).GetComponent<DeployExplosion>().Explode();
+            Destroy(gameObject);
+        }
     }
 }

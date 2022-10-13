@@ -76,13 +76,8 @@ public class Enemy6 : MonoBehaviour
         int shootType = UnityEngine.Random.Range(0, shots.Length);
         yield return new WaitForSeconds(1.5f);
         
-        if (shootType == 0)
-        {
-            ShootShock();
-        } else if (shootType == 1)
-        {
-            StartCoroutine(ShootMissile());
-        }
+        if (shootType == 0) ShootShock();
+        else if (shootType == 1) StartCoroutine(ShootMissile());
 
         yield return new WaitForSeconds(2);
         callback?.Invoke();
@@ -97,6 +92,7 @@ public class Enemy6 : MonoBehaviour
 
     private void ShootShock()
     {
+        
         Instantiate(shots[0], launchPosition1.position, Quaternion.identity);
         Instantiate(shots[0], launchPosition2.position, Quaternion.identity);
     }
