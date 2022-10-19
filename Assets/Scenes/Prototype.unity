@@ -1058,25 +1058,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71291a87d4b83c2438f0b05be7239087, type: 3}
---- !u!1 &1109399431 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3018083147723814581, guid: be250f85b5b4ba3458f001526f497d9d, type: 3}
-  m_PrefabInstance: {fileID: 3018083147710495062}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1109399438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1109399431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b4cae65e32388740ad426446de00e2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  crushState: 0
 --- !u!1 &1659781983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1241,21 +1222,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy 7
       objectReference: {fileID: 0}
-    - target: {fileID: 3018083147441381840, guid: be250f85b5b4ba3458f001526f497d9d, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3018083147441381845, guid: be250f85b5b4ba3458f001526f497d9d, type: 3}
-      propertyPath: breakableGround.m_Bits
-      value: 2048
-      objectReference: {fileID: 0}
     - target: {fileID: 3018083147441381847, guid: be250f85b5b4ba3458f001526f497d9d, type: 3}
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3018083147441381847, guid: be250f85b5b4ba3458f001526f497d9d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.3589437
+      value: -0.241
       objectReference: {fileID: 0}
     - target: {fileID: 3018083147441381847, guid: be250f85b5b4ba3458f001526f497d9d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1292,18 +1265,6 @@ PrefabInstance:
     - target: {fileID: 3018083147441381847, guid: be250f85b5b4ba3458f001526f497d9d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3018083147441381854, guid: be250f85b5b4ba3458f001526f497d9d, type: 3}
-      propertyPath: m_Constraints
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3018083147723814581, guid: be250f85b5b4ba3458f001526f497d9d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3018083147723814591, guid: be250f85b5b4ba3458f001526f497d9d, type: 3}
-      propertyPath: m_Constraints
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be250f85b5b4ba3458f001526f497d9d, type: 3}

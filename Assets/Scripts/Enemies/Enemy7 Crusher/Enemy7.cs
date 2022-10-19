@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy7 : MonoBehaviour
 {
-    public enum EnemyState { IDLE, PREPARETORUNNING, RUNNING, PREPARETOCRUSH, CRUSH, BACKTOIDLE }
+    public enum EnemyState { IDLE, PREPARETORUNNING, RUNNING, PREPARETOCRUSH, CRUSHING, BACKTOIDLE }
 
     Animator anim;
     bool isRunning;
@@ -20,7 +20,6 @@ public class Enemy7 : MonoBehaviour
 
     private void Start()
     {
-        
         isLeft = true;
         isRunning = false;
         anim = GetComponent<Animator>();
@@ -28,7 +27,6 @@ public class Enemy7 : MonoBehaviour
         enemyState = EnemyState.PREPARETORUNNING;
 
         crusher = transform.GetChild(0).GetComponent<Enemy7Crusher>();
-        crusher.enabled = false;
     }
 
     private void Update()
@@ -36,6 +34,12 @@ public class Enemy7 : MonoBehaviour
         if (enemyState.Equals(EnemyState.PREPARETORUNNING))
         {
             PrepareToRunning();
+        } 
+        else if (enemyState.Equals(EnemyState.PREPARETOCRUSH))
+        {
+            isRunning = false;
+            enemyState = EnemyState.CRUSHING;
+            crusher.Crush();
         }
 
         anim.SetBool("isRunning", isRunning);
@@ -43,41 +47,32 @@ public class Enemy7 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        IsBreakableBelow();
         if (enemyState.Equals(EnemyState.RUNNING))
         {
             isRunning = true;
+
             if (!IsInPositionGoal())
-            {
                 Running();
-            } 
             else
-            {
-                isLeft = !isLeft;
-                PrepareToRunning();
-            }
+                Turning();
+
+            if (IsBreakableBelow())
+                enemyState = EnemyState.PREPARETOCRUSH;
+        } 
+        else if (enemyState.Equals(EnemyState.CRUSHING))
+        {
+            rb.velocity = Vector2.zero;
         }
     }
 
     private bool IsBreakableBelow()
     {
-        bool response = Physics2D.Raycast(transform.position, Vector2.down, 6, breakableGround);
-        Debug.DrawRay(transform.position, new Vector2(0, -1 * 6), Color.red);
-
-        if (response)
-        {
-            Debug.Log("Breakable ground detected!!!");
-        }
-
-        return response;
+        return Physics2D.Raycast(transform.position, Vector2.down, 6, breakableGround);
     }
 
     private bool IsInPositionGoal()
     {
-        bool response = false;
-        if (Vector2.Distance(transform.position, positionToMove) < 0.5f)
-            response = true;
-        return response;
+        return (Vector2.Distance(transform.position, positionToMove) < 0.5f);
     }
 
     private void PrepareToRunning()
@@ -87,9 +82,22 @@ public class Enemy7 : MonoBehaviour
         enemyState = EnemyState.RUNNING;
     }
 
+    private void Turning()
+    {
+        isLeft = !isLeft;
+        transform.eulerAngles = new Vector2(isLeft ? 0 : 180, 0);
+
+        PrepareToRunning();
+    }
+
     private void Running()
     {
         rb.velocity = positionToMove.normalized * speed;
+    }
+
+    public void DidTheCrush()
+    {
+        enemyState = EnemyState.PREPARETORUNNING;
     }
 
 }
