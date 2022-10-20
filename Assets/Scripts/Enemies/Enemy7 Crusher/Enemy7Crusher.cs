@@ -23,6 +23,7 @@ public class Enemy7Crusher : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Debug.Log(crushState);
         if (crushState.Equals(CrushState.CRUSING))
             rb.velocity = Vector2.down * speed;
         else if (crushState.Equals(CrushState.RETURNING))
@@ -31,23 +32,18 @@ public class Enemy7Crusher : MonoBehaviour
 
     public void Crush()
     {
-        PrepareToCrush();
-    }
-
-    private void PrepareToCrush()
-    {
         crushState = CrushState.CRUSING;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("bbbb");
-        crushState = CrushState.RETURNING;
+        if (collision.CompareTag("Breakable Ground"))
+            crushState = CrushState.RETURNING;
     }
 
     private void ReturnToOriginalPosition()
     {
-        if (Vector2.Distance(transform.position, enemy7Hook.position) < 0.38f)
+        if (CrushIsInTheHook(0.38f))
         {
             rb.velocity = Vector2.zero;
             crushState = CrushState.RETURNED;
@@ -57,5 +53,10 @@ public class Enemy7Crusher : MonoBehaviour
         {
             rb.velocity = Vector2.up * speed;
         }
+    }
+
+    private bool CrushIsInTheHook(float distance)
+    {
+        return Vector2.Distance(transform.position, enemy7Hook.position) < distance;
     }
 }

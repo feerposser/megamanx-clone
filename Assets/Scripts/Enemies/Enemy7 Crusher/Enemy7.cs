@@ -32,15 +32,9 @@ public class Enemy7 : MonoBehaviour
     private void Update()
     {
         if (enemyState.Equals(EnemyState.PREPARETORUNNING))
-        {
             PrepareToRunning();
-        } 
         else if (enemyState.Equals(EnemyState.PREPARETOCRUSH))
-        {
-            isRunning = false;
-            enemyState = EnemyState.CRUSHING;
-            crusher.Crush();
-        }
+            PrepareToCrush();
 
         anim.SetBool("isRunning", isRunning);
     }
@@ -48,21 +42,30 @@ public class Enemy7 : MonoBehaviour
     private void FixedUpdate()
     {
         if (enemyState.Equals(EnemyState.RUNNING))
-        {
-            isRunning = true;
-
-            if (!IsInPositionGoal())
-                Running();
-            else
-                Turning();
-
-            if (IsBreakableBelow())
-                enemyState = EnemyState.PREPARETOCRUSH;
-        } 
+            Running();
         else if (enemyState.Equals(EnemyState.CRUSHING))
-        {
-            rb.velocity = Vector2.zero;
-        }
+            Crushing();
+    }
+
+    /* -- movement -- */
+    private void PrepareToRunning()
+    {
+        float newRunningDistance = isLeft ? -runningDistance : runningDistance;
+        positionToMove = transform.position + new Vector3(newRunningDistance, 0, 0);
+        enemyState = EnemyState.RUNNING;
+    }
+
+    private void Running()
+    {
+        isRunning = true;
+
+        if (!IsInPositionGoal())
+            Move();
+        else
+            Turning();
+
+        if (IsBreakableBelow())
+            enemyState = EnemyState.PREPARETOCRUSH;
     }
 
     private bool IsBreakableBelow()
@@ -72,32 +75,44 @@ public class Enemy7 : MonoBehaviour
 
     private bool IsInPositionGoal()
     {
-        return (Vector2.Distance(transform.position, positionToMove) < 0.5f);
+        return Vector2.Distance(transform.position, positionToMove) < 0.5f;
     }
 
-    private void PrepareToRunning()
+    private void OnDrawGizmosSelected()
     {
-        float newRunningDistance = isLeft ? -runningDistance : runningDistance;
-        positionToMove = transform.position + new Vector3(newRunningDistance, 0, 0);
-        enemyState = EnemyState.RUNNING;
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(positionToMove, 0.3f);
+        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, -1 * 6));
+    }
+
+    private void Move()
+    {
+        rb.velocity = positionToMove.normalized * speed;
     }
 
     private void Turning()
     {
         isLeft = !isLeft;
-        transform.eulerAngles = new Vector2(isLeft ? 0 : 180, 0);
+        transform.eulerAngles = new Vector2(0, isLeft ? 0 : 180);
 
         PrepareToRunning();
     }
 
-    private void Running()
+    /* -- crush -- */
+    private void PrepareToCrush()
     {
-        rb.velocity = positionToMove.normalized * speed;
+        isRunning = false;
+        enemyState = EnemyState.CRUSHING;
+        crusher.Crush();
+    }
+
+    private void Crushing()
+    {
+        rb.velocity = Vector2.zero;
     }
 
     public void DidTheCrush()
     {
         enemyState = EnemyState.PREPARETORUNNING;
-    }
-
+    }    
 }

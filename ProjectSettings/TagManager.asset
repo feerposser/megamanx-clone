@@ -9,6 +9,7 @@ TagManager:
   - Damageable
   - Reflect
   - Enemy7 Hook
+  - Breakable Ground
   layers:
   - Default
   - TransparentFX
