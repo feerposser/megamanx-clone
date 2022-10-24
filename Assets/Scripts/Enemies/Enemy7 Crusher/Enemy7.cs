@@ -18,6 +18,13 @@ public class Enemy7 : MonoBehaviour
     [SerializeField] EnemyState enemyState;
     [SerializeField] LayerMask breakableGround;
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(positionToMove, 0.3f);
+        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, -1 * 6));
+    }
+
     private void Start()
     {
         isLeft = true;
@@ -38,6 +45,7 @@ public class Enemy7 : MonoBehaviour
 
         anim.SetBool("isRunning", isRunning);
     }
+
 
     private void FixedUpdate()
     {
@@ -78,17 +86,9 @@ public class Enemy7 : MonoBehaviour
         return Vector2.Distance(transform.position, positionToMove) < 0.5f;
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(positionToMove, 0.3f);
-        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, -1 * 6));
-    }
-
     private void Move()
     {
-        Vector2 direction = isLeft ? Vector2.left : Vector2.right;
-        rb.velocity = direction * speed;
+        rb.velocity = isLeft ? Vector2.left : Vector2.right * speed;
     }
 
     private void Turning()
