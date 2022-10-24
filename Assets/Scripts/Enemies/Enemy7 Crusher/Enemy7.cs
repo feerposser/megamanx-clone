@@ -119,13 +119,12 @@ public class Enemy7 : MonoBehaviour
     {
         isCrushEnable = false;
         StartCoroutine(HandleCrushEnable());
-        enemyState = EnemyState.PREPARETORUNNING;
+        enemyState = EnemyState.RUNNING;
     }
 
     private IEnumerator HandleCrushEnable()
     {
         float timeBetwwenCrushes = Random.Range(timeBetweenCrushesMin, timeBetweenCrushesMax);
-        Debug.Log("timeBetwwenCrushes " + timeBetwwenCrushes);
         yield return new WaitForSeconds(timeBetwwenCrushes);
         isCrushEnable = true;
     }
