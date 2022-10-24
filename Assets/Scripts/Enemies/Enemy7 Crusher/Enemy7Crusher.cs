@@ -37,7 +37,10 @@ public class Enemy7Crusher : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Breakable Ground"))
+        {
             crushState = CrushState.RETURNING;
+            collision.gameObject.SetActive(false);
+        }
     }
 
     private void ReturnToOriginalPosition()
