@@ -9,6 +9,7 @@ public class Enemy7 : MonoBehaviour
     Animator anim;
     bool isRunning;
     Rigidbody2D rb;
+    bool isCrushEnable;
     Enemy7Crusher crusher;
     Vector2 positionToMove;
 
@@ -16,6 +17,8 @@ public class Enemy7 : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float runningDistance;
     [SerializeField] EnemyState enemyState;
+    [SerializeField] float timeBetweenCrushesMin;
+    [SerializeField] float timeBetweenCrushesMax;
     [SerializeField] LayerMask breakableGround;
 
     private void OnDrawGizmosSelected()
@@ -29,11 +32,12 @@ public class Enemy7 : MonoBehaviour
     {
         isLeft = true;
         isRunning = false;
+        isCrushEnable = true;
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         enemyState = EnemyState.PREPARETORUNNING;
-
         crusher = transform.GetChild(0).GetComponent<Enemy7Crusher>();
+        
     }
 
     private void Update()
@@ -71,7 +75,7 @@ public class Enemy7 : MonoBehaviour
         else
             Turning();
 
-        if (IsBreakableBelow())
+        if (isCrushEnable && IsBreakableBelow())
             enemyState = EnemyState.PREPARETOCRUSH;
     }
 
@@ -113,6 +117,16 @@ public class Enemy7 : MonoBehaviour
 
     public void DidTheCrush()
     {
+        isCrushEnable = false;
+        StartCoroutine(HandleCrushEnable());
         enemyState = EnemyState.PREPARETORUNNING;
-    }    
+    }
+
+    private IEnumerator HandleCrushEnable()
+    {
+        float timeBetwwenCrushes = Random.Range(timeBetweenCrushesMin, timeBetweenCrushesMax);
+        Debug.Log("timeBetwwenCrushes " + timeBetwwenCrushes);
+        yield return new WaitForSeconds(timeBetwwenCrushes);
+        isCrushEnable = true;
+    }
 }
