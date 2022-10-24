@@ -46,7 +46,6 @@ public class Enemy7 : MonoBehaviour
         anim.SetBool("isRunning", isRunning);
     }
 
-
     private void FixedUpdate()
     {
         if (enemyState.Equals(EnemyState.RUNNING))
