@@ -23,7 +23,6 @@ public class Enemy7Crusher : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log(crushState);
         if (crushState.Equals(CrushState.CRUSING))
             rb.velocity = Vector2.down * speed;
         else if (crushState.Equals(CrushState.RETURNING))

@@ -87,7 +87,8 @@ public class Enemy7 : MonoBehaviour
 
     private void Move()
     {
-        rb.velocity = positionToMove.normalized * speed;
+        Vector2 direction = isLeft ? Vector2.left : Vector2.right;
+        rb.velocity = direction * speed;
     }
 
     private void Turning()
