@@ -15,46 +15,65 @@ public class texte : MonoBehaviour
     {
         p = GetComponent<PolygonCollider2D>();
 
-        SetPolygon();
+        OriginalPolygon();
     }
 
-    Vector2 GetPoint(float x, float y)
+    Vector2 Create2DVector(float x, float y)
     {
         return new Vector2(x, y);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("trigger");
-        Debug.Log(collision.bounds);
-        detection = collision.bounds.center;
-        detection2 = collision.bounds.extents;
-
-        Debug.Log(collision.bounds.center);
-        Debug.Log(collision.bounds.extents);
-        Debug.Log(collision.bounds.size);
-
-        Vector3 left = collision.bounds.center + new Vector3(-collision.bounds.extents.x, 0, 0);
-        Vector3 rigth = collision.bounds.center + new Vector3(collision.bounds.extents.x, 0, 0);
-
-        detection = left;
-        detection2 = rigth;
+        Detection(collision.contacts[0].point, collision.contacts[1].point, collision.gameObject);
     }
 
-    void SetPolygon()
+    void Detection(Vector2 v1, Vector2 v2, GameObject g)
     {
-        points.Add(GetPoint(-.5f, .5f));
+        for (int i = 1; i < points.Count; i++)
+        {
+            int size = points.Count;
+            Debug.Log(i + " : " +points[i].x + " > " + v1.x + " ? " + (points[i].x > v1.x));
+            detection = v1;
 
-        points.Add(GetPoint(0, .5f));
-        points.Add(GetPoint(0, -.2f));
+            Vector2 v3aux = new Vector2(v1.x / transform.localScale.x, .5f);
+            Vector2 v4aux = new Vector2(v2.x / transform.localScale.x, .5f);
 
-        points.Add(GetPoint(0.2f, -.2f));
-        points.Add(GetPoint(0.2f, .5f));
+            Vector2 v3 = new Vector2(v1.x / transform.localScale.x, v1.y - 0.3f);
+            Vector2 v4 = new Vector2(v2.x / transform.localScale.x, v2.y - 0.3f);
+            if (points[i].x > v3.x)
+            {
+                Debug.Log("b");
+                points.Insert(i, v4aux);
+                points.Insert(i, v4);
+                points.Insert(i, v3);
+                points.Insert(i, v3aux);
+                p.SetPath(0, points);
+                Destroy(g);
+                return;
+            }
 
+            if (size < points.Count) return;
+        }
+    }
 
-        points.Add(GetPoint(.5f, .5f));
-        points.Add(GetPoint(.5f, -.5f));
-        points.Add(GetPoint(-.5f, -.5f));
+    void OriginalPolygon()
+    {
+        points.Add(Create2DVector(-.5f, .5f));
+
+        /*
+        // left
+        points.Add(Create2DVector(0, .5f));
+        points.Add(Create2DVector(0, -.2f));
+
+        // rigth
+        points.Add(Create2DVector(0.2f, -.2f));
+        points.Add(Create2DVector(0.2f, .5f));
+        */
+
+        points.Add(Create2DVector(.5f, .5f));
+        points.Add(Create2DVector(.5f, -.5f));
+        points.Add(Create2DVector(-.5f, -.5f));
 
         p.SetPath(0, points);
     }
@@ -66,6 +85,5 @@ public class texte : MonoBehaviour
 
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(detection2, 0.09f);
-        
     }
 }
