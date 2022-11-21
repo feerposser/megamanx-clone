@@ -34,6 +34,7 @@ public class texte : MonoBehaviour
     {
         LinkedList<Node> nodes = new LinkedList<Node>();
 
+        // points that create the borders of the square
         public Vector2 topLeft, topRight, bottomLeft, bottomRight;
 
         public ImpactConstructor(Node node)
@@ -44,19 +45,17 @@ public class texte : MonoBehaviour
             topRight = node.topRight;
         }
 
-        public void Insert(Node newNode)
+        public void InsertNode(Node newNode)
         {
             newNode.id = nodes.Count + 1;
             LinkedListNode<Node> node;
 
-            if (nodes.Count > 2)
+            if (nodes.Count >= 2)
             {
                 node = nodes.First;
                 foreach (Node _ in nodes)
                 {
-                    Debug.Log(node.Value.id);
-
-                    if (node.Next == null)
+                    if (node.Next == null) // if the loop reach the last element, the node must be before the first of after the last
                     {
                         LinkedListNode<Node> first = nodes.First;
                         if (NewNodeIsBefore(first, newNode))
@@ -73,43 +72,27 @@ public class texte : MonoBehaviour
                         }
                     }
 
+                    // if new node is between the actual node and the next, add it between
                     if (NewNodeIsAfter(node, newNode) && NewNodeIsBefore(node.Next, newNode))
                     {
-                        Debug.Log("add node between " + node.Value.id + " and " + node.Next.Value.id);
                         nodes.AddAfter(node, newNode);
                         return;
                     }
 
-                    node = node.Next;
+                    node = node.Next; // set to the next node
                 }
             }
             else
             {
                 if (nodes.Count == 0) 
                     nodes.AddFirst(newNode); // if is the first one, add first
-
                 else if (nodes.Count == 1) // if is the second one
                 {
                     node = nodes.First;
-                    if (NewNodeIsBefore(node, newNode)) 
-                        nodes.AddBefore(node, newNode); // if is smaller than the first, add before him
-                    else if (NewNodeIsAfter(node, newNode)) 
-                        nodes.AddAfter(node, newNode); // if is bigger than the first, add after him
-                    else 
-                        Debug.LogWarning("#1 error"); // if no condition is accepted, something is wrong :|
-                }
-
-                else if (nodes.Count == 2) // if is the third one
-                {
-                    node = nodes.First;
-                    if (NewNodeIsBefore(node, newNode)) 
-                        nodes.AddBefore(node, newNode); // smaller than the first
-                    else if (NewNodeIsAfter(node, newNode) && NewNodeIsBefore(node.Next, newNode)) 
-                        nodes.AddAfter(node, newNode); // bigger than first and smaller than second
-                    else if (NewNodeIsAfter(node.Next, newNode)) 
-                        nodes.AddAfter(node.Next, newNode); // bigger than the second
-                    else 
-                        Debug.LogWarning("#2 error"); // if no condition is accepted, something is wrong :|
+                    if (NewNodeIsBefore(node, newNode)) // if is smaller than the first,
+                        nodes.AddBefore(node, newNode); // add before him
+                    else if (NewNodeIsAfter(node, newNode)) // if is bigger than the first
+                        nodes.AddAfter(node, newNode); // add after him
                 }
             }  
         }
@@ -126,6 +109,9 @@ public class texte : MonoBehaviour
 
         public Vector2[] ToArray()
         {
+            // return the linked list nodes as a array of vectors
+            // start to the left to right
+
             List<Vector2> vectorList = new List<Vector2>();
 
             LinkedListNode<Node> node = nodes.First;
@@ -152,8 +138,8 @@ public class texte : MonoBehaviour
             Debug.Log("----- start list");
             foreach (Node node in nodes)
             {
-                Debug.Log("------" + i);
-                Debug.Log(node);
+                Debug.Log("\t--" + i);
+                Debug.Log("\t" + node);
                 i++;
             }
             Debug.Log("----- end list");
@@ -220,7 +206,7 @@ public class texte : MonoBehaviour
 
         Node hotspot = new Node(nodes);
 
-        l.Insert(hotspot);
+        l.InsertNode(hotspot);
 
         points.Clear();
 
