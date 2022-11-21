@@ -55,35 +55,61 @@ public class texte : MonoBehaviour
                 foreach (Node _ in nodes)
                 {
                     Debug.Log(node.Value.id);
+
+                    if (node.Next == null)
+                    {
+                        LinkedListNode<Node> first = nodes.First;
+                        if (NewNodeIsBefore(first, newNode))
+                        {
+                            nodes.AddBefore(first, newNode);
+                            return;
+                        }
+
+                        LinkedListNode<Node> last = nodes.Last;
+                        if (NewNodeIsAfter(last, newNode))
+                        {
+                            nodes.AddAfter(last, newNode);
+                            return;
+                        }
+                    }
+
                     if (NewNodeIsAfter(node, newNode) && NewNodeIsBefore(node.Next, newNode))
                     {
                         Debug.Log("add node between " + node.Value.id + " and " + node.Next.Value.id);
                         nodes.AddAfter(node, newNode);
                         return;
                     }
-                    if (node.Next == null) return;
+
                     node = node.Next;
                 }
             }
             else
             {
-                if (nodes.Count == 0) nodes.AddFirst(newNode); // if is the first one, add first
+                if (nodes.Count == 0) 
+                    nodes.AddFirst(newNode); // if is the first one, add first
 
                 else if (nodes.Count == 1) // if is the second one
                 {
                     node = nodes.First;
-                    if (NewNodeIsBefore(node, newNode)) nodes.AddBefore(node, newNode); // if is smaller than the first, add before him
-                    else if (NewNodeIsAfter(node, newNode)) nodes.AddAfter(node, newNode); // if is bigger than the first, add after him
-                    else Debug.LogWarning("#1 error"); // if no condition is accepted, something is wrong :|
+                    if (NewNodeIsBefore(node, newNode)) 
+                        nodes.AddBefore(node, newNode); // if is smaller than the first, add before him
+                    else if (NewNodeIsAfter(node, newNode)) 
+                        nodes.AddAfter(node, newNode); // if is bigger than the first, add after him
+                    else 
+                        Debug.LogWarning("#1 error"); // if no condition is accepted, something is wrong :|
                 }
 
                 else if (nodes.Count == 2) // if is the third one
                 {
                     node = nodes.First;
-                    if (NewNodeIsBefore(node, newNode)) nodes.AddBefore(node, newNode); // smaller than the first
-                    else if (NewNodeIsAfter(node, newNode) && NewNodeIsBefore(node.Next, newNode)) nodes.AddAfter(node, newNode); // bigger than first and smaller than second
-                    else if (NewNodeIsAfter(node.Next, newNode)) nodes.AddAfter(node.Next, newNode); // bigger than the second
-                    else Debug.LogWarning("#2 error"); // if no condition is accepted, something is wrong :|
+                    if (NewNodeIsBefore(node, newNode)) 
+                        nodes.AddBefore(node, newNode); // smaller than the first
+                    else if (NewNodeIsAfter(node, newNode) && NewNodeIsBefore(node.Next, newNode)) 
+                        nodes.AddAfter(node, newNode); // bigger than first and smaller than second
+                    else if (NewNodeIsAfter(node.Next, newNode)) 
+                        nodes.AddAfter(node.Next, newNode); // bigger than the second
+                    else 
+                        Debug.LogWarning("#2 error"); // if no condition is accepted, something is wrong :|
                 }
             }  
         }
@@ -212,7 +238,7 @@ public class texte : MonoBehaviour
 
         destroyGameObject = true;
 
-        l.Show();
+        //l.Show();
 
         return;
     }
@@ -226,9 +252,9 @@ public class texte : MonoBehaviour
         p.SetPath(0, points);
     }
 
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(detection, 0.1f);
-    }
+    }*/
 }
